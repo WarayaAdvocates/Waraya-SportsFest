@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
+  <title>WARAYA Staff Login | Sportsfest Access</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 10% 30%, #0b2b44 0%, #061a2c 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* animated background elements for sporty vibe */
+    body::before {
+      content: "🏆";
+      font-size: 220px;
+      position: absolute;
+      bottom: -40px;
+      left: -60px;
+      opacity: 0.08;
+      pointer-events: none;
+      transform: rotate(-15deg);
+    }
+
+    body::after {
+      content: "⚡";
+      font-size: 180px;
+      position: absolute;
+      top: -30px;
+      right: -40px;
+      opacity: 0.08;
+      pointer-events: none;
+      transform: rotate(10deg);
+    }
+
+    .login-container {
+      max-width: 520px;
+      width: 100%;
+      z-index: 2;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* premium glassmorphic card */
+    .glass-login {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 64px;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 45px 65px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.3);
+      text-align: center;
+      transition: transform 0.25s ease;
+    }
+
+    .glass-login:hover {
+      transform: translateY(-5px);
+    }
+
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      width: 85px;
+      height: auto;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #0f3b6f, #1d72b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-top: 0.25rem;
+    }
+
+    .sport-badge {
+      display: inline-block;
+      background: linear-gradient(95deg, #ffd166, #ffb347);
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #2c2c2c;
+      margin: 0.6rem 0 0.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      color: #1e6fdf;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: 40px;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 111, 223, 0.1);
+      transform: translateX(-3px);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.5rem 0;
+      color: #8ba0bc;
+      font-size: 0.8rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .divider::before {
+      margin-right: 1rem;
+    }
+
+    .divider::after {
+      margin-left: 1rem;
+    }
+
+    .input-group {
+      margin: 1.6rem 0;
+      text-align: left;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #1f3e5c;
+      font-size: 0.9rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 60px;
+      border: 1.5px solid #e0e7f0;
+      background: white;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s;
+      outline: none;
+      padding-right: 70px;
+    }
+
+    .input-wrapper input:focus {
+      border-color: #1e6fdf;
+      box-shadow: 0 0 0 4px rgba(30, 111, 223, 0.15);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #1e6fdf;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+
+    .toggle-password:hover {
+      background: #eef3ff;
+    }
+
+    .login-btn {
+      background: linear-gradient(105deg, #1e6fdf, #0a4c9e);
+      width: 100%;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 0.8rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      background: linear-gradient(105deg, #0f5bc0, #073a6e);
+      transform: scale(1.01);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .google-btn {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      color: #1f3e5c;
+      margin-top: 0.5rem;
+    }
+
+    .google-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      transform: scale(1.01);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .loading-spinner-small {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .dark-spinner {
+      border: 2.5px solid #e2e8f0;
+      border-top-color: #1e6fdf;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* toast */
+    .toast-stack {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast-message {
+      background: #1e293bc9;
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      animation: slideLeft 0.25s ease;
+      border-left: 5px solid;
+    }
+
+    .toast-message.error {
+      border-left-color: #f97316;
+      background: #991b1bd9;
+    }
+
+    .toast-message.success {
+      border-left-color: #4ade80;
+      background: #0f5f3fd9;
+    }
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* access denied modal */
+    .modal-denied {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .modal-denied.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: white;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 48px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 40px 55px rgba(0, 0, 0, 0.3);
+      animation: zoomModal 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    @keyframes zoomModal {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-card h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #b91c1c;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-card p {
+      margin: 1rem 0;
+      color: #2d3e5f;
+    }
+
+    .modal-btn {
+      background: #1e6fdf;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      margin-top: 0.8rem;
+    }
+
+    @media (max-width: 550px) {
+      .glass-login { padding: 1.8rem; }
+      h2 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="glass-login">
+    <!-- Back button to registration form -->
+    <button class="back-link" id="backToFormBtn">
+      ← Back to Registration Form
+    </button>
+
+    <div class="logo-wrapper">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo" class="logo">
+    </div>
+    <h2>⚡ STAFF PORTAL</h2>
+    <div class="sport-badge">🏅 SPORTSFEST COMMITTEE</div>
+    <p style="margin: 0.8rem 0 0.2rem; color:#4b6a88;">Authorized access only • Admin / Officers</p>
+
+    <!-- Email/Password Login -->
+    <div class="input-group">
+      <label>📧 Email Address</label>
+      <div class="input-wrapper">
+        <input type="email" id="loginEmail" placeholder="officer@waraya.org" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>🔒 Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="loginPassword" placeholder="Enter your secure password" autocomplete="current-password">
+        <button class="toggle-password" id="togglePasswordBtn" type="button">👁️ Show</button>
+      </div>
+    </div>
+
+    <button class="login-btn" id="loginBtn">
+      <span>🎟️ Sign in with Email</span>
+      <span id="loginLoader" style="display:none;" class="loading-spinner-small"></span>
+    </button>
+
+    <div class="divider">OR</div>
+
+    <!-- Google Sign-In Button -->
+    <button class="login-btn google-btn" id="googleSignInBtn">
+      <span>🅶 Sign in with Google</span>
+      <span id="googleLoader" style="display:none;" class="loading-spinner-small dark-spinner"></span>
+    </button>
+
+    <p style="margin-top: 1.5rem; font-size: 0.75rem; color:#6c8db0;">🔐 Secure authentication • WARAYA Youth Advocates</p>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastStack" class="toast-stack"></div>
+
+<!-- Access Denied Modal -->
+<div id="accessDeniedModal" class="modal-denied">
+  <div class="modal-card">
+    <h3>⛔ Access Denied</h3>
+    <p>Your account does not have <strong>Admin or Officer</strong> privileges.<br>Please contact the organization head.</p>
+    <button class="modal-btn" id="closeDeniedModal">Got it</button>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, collection, query, where, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
+    authDomain: "waraya-e1de8.firebaseapp.com",
+    projectId: "waraya-e1de8",
+    storageBucket: "waraya-e1de8.firebasestorage.app",
+    messagingSenderId: "140173641530",
+    appId: "1:140173641530:web:7bdacc1c6c55bdf332f203",
+    measurementId: "G-EWG6DBRHSG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  // DOM elements
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginLoader = document.getElementById('loginLoader');
+  const googleBtn = document.getElementById('googleSignInBtn');
+  const googleLoader = document.getElementById('googleLoader');
+  const toastStack = document.getElementById('toastStack');
+  const accessDeniedModal = document.getElementById('accessDeniedModal');
+  const closeDeniedBtn = document.getElementById('closeDeniedModal');
+  const backToFormBtn = document.getElementById('backToFormBtn');
+
+  // Helper: show toast notifications
+  function showToast(message, type = 'error') {
+    const toast = document.createElement('div');
+    toast.className = `toast-message ${type}`;
+    toast.innerText = message;
+    toastStack.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3800);
+  }
+
+  // Helper: close access denied modal
+  function closeAccessDeniedModal() {
+    accessDeniedModal.classList.remove('active');
+  }
+  closeDeniedBtn.addEventListener('click', closeAccessDeniedModal);
+
+  // Back button to registration form
+  backToFormBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+
+  // Password visibility toggle
+  const toggleBtn = document.getElementById('togglePasswordBtn');
+  toggleBtn.addEventListener('click', () => {
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+    toggleBtn.innerHTML = type === 'password' ? '👁️ Show' : '🙈 Hide';
+  });
+
+  // Function to check user role from Firestore "users" collection
+  async function hasAdminOrOfficerRole(userId, email) {
+    try {
+      // First try: direct document fetch by userId
+      const userDocRef = doc(db, "users", userId);
+      const userSnap = await getDoc(userDocRef);
+      if (userSnap.exists()) {
+        const role = userSnap.data().role;
+        if (role === 'admin' || role === 'officer') return true;
+      }
+      // Second attempt: query by email field
+      const q = query(collection(db, "users"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const roleData = querySnapshot.docs[0].data().role;
+        if (roleData === 'admin' || roleData === 'officer') return true;
+      }
+      return false;
+    } catch (err) {
+      console.error("Role check error:", err);
+      return false;
+    }
+  }
+
+  // Handle successful login and redirect
+  async function handleSuccessfulLogin(user, email) {
+    const isAuthorized = await hasAdminOrOfficerRole(user.uid, email);
+    
+    if (!isAuthorized) {
+      await signOut(auth);
+      accessDeniedModal.classList.add('active');
+      showToast('Access denied: Admin/Officer role required.', 'error');
+      return false;
+    }
+    
+    showToast('Login successful! Redirecting to dashboard...', 'success');
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 800);
+    return true;
+  }
+
+  // Email/Password Login
+  loginBtn.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      showToast('Please enter both email and password.', 'error');
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginLoader.style.display = 'inline-block';
+    loginBtn.querySelector('span:first-child').style.opacity = '0.7';
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await handleSuccessfulLogin(user, email);
+    } catch (error) {
+      console.error("Login error:", error);
+      let errorMsg = 'Authentication failed. ';
+      if (error.code === 'auth/user-not-found') errorMsg = 'No account found with this email.';
+      else if (error.code === 'auth/wrong-password') errorMsg = 'Incorrect password. Please try again.';
+      else if (error.code === 'auth/invalid-email') errorMsg = 'Invalid email format.';
+      else errorMsg += error.message;
+      showToast(errorMsg, 'error');
+      loginBtn.disabled = false;
+      loginLoader.style.display = 'none';
+      loginBtn.querySelector('span:first-child').style.opacity = '1';
+    }
+  });
+
+  // Google Sign-In
+  googleBtn.addEventListener('click', async () => {
+    googleBtn.disabled = true;
+    googleLoader.style.display = 'inline-block';
+    googleBtn.querySelector('span:first-child').style.opacity = '0.7';
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const email = user.email;
+      
+      // Check if user has admin/officer role
+      const isAuthorized = await hasAdminOrOfficerRole(user.uid, email);
+      
+      if (!isAuthorized) {
+        await signOut(auth);
+        accessDeniedModal.classList.add('active');
+        showToast('Access denied: Admin/Officer role required for Google Sign-In.', 'error');
+        googleBtn.disabled = false;
+        googleLoader.style.display = 'none';
+        googleBtn.querySelector('span:first-child').style.opacity = '1';
+        return;
+      }
+      
+      showToast('Google Sign-In successful! Redirecting...', 'success');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    } catch (error) {
+      console.error("Google Sign-In error:", error);
+      let errorMsg = 'Google Sign-In failed. ';
+      if (error.code === 'auth/popup-closed-by-user') {
+        errorMsg = 'Sign-in popup was closed. Please try again.';
+      } else if (error.code === 'auth/popup-blocked') {
+        errorMsg = 'Pop-up blocked. Please allow pop-ups for this site.';
+      } else {
+        errorMsg += error.message;
+      }
+      showToast(errorMsg, 'error');
+      googleBtn.disabled = false;
+      googleLoader.style.display = 'none';
+      googleBtn.querySelector('span:first-child').style.opacity = '1';
+    }
+  });
+
+  // Press Enter to submit
+  const inputs = [emailInput, passwordInput];
+  inputs.forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        loginBtn.click();
+      }
+    });
+  });
+
+  // If already logged in with admin/officer, redirect to dashboard
+  (async () => {
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const authorized = await hasAdminOrOfficerRole(currentUser.uid, currentUser.email);
+        if (authorized) {
+          window.location.href = 'dashboard.html';
+        } else {
+          await signOut(auth);
+        }
+      }
+    } catch (err) {
+      console.log("Session check error:", err);
+    }
+  })();
+</script>
+</body>
+</html>

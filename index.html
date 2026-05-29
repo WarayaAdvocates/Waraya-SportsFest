@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
+  <title>WARAYA Sportsfest Registration | 22nd Anniversary</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #d9e4ff 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ========== TOP NAVIGATION ========== */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-area img {
+      height: 52px;
+      width: auto;
+      transition: transform 0.2s;
+    }
+
+    .logo-area img:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-area h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0b3b6b, #1e6fdf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .staff-btn {
+      background: linear-gradient(95deg, #1e3a8a, #1e6fdf);
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      letter-spacing: 0.3px;
+    }
+
+    .staff-btn:hover {
+      background: linear-gradient(95deg, #0f2b6d, #0b4a9f);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ========== GLASS CARD ========== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border-radius: 48px;
+      padding: 2.5rem 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.2s;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .event-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .event-title h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0b3b6b, #1e6fdf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.3rem;
+    }
+
+    .event-title .theme {
+      font-size: 1rem;
+      color: #4a627a;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    .event-title .tagline {
+      font-size: 0.9rem;
+      color: #1e6fdf;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .subhead {
+      color: #4a627a;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      border-left: 4px solid #1e6fdf;
+      padding-left: 1rem;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 2rem 0 1.2rem 0;
+      border-left: 5px solid #1e6fdf;
+      padding-left: 1rem;
+      color: #0a3e6d;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: #1f3b4c;
+      font-size: 0.9rem;
+    }
+
+    .input-group .hint {
+      font-size: 0.7rem;
+      color: #6c8db0;
+      margin-top: -0.3rem;
+    }
+
+    input, select, textarea {
+      padding: 0.9rem 1.2rem;
+      border-radius: 32px;
+      border: 1.5px solid #e2e8f0;
+      background: white;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1e6fdf;
+      box-shadow: 0 0 0 4px rgba(30, 111, 223, 0.15);
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0;
+    }
+
+    .radio-group label, .checkbox-group label {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.25rem 0;
+    }
+
+    .sport-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .sport-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 28px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .sport-card:hover {
+      border-color: #1e6fdf;
+      background: #f0f7ff;
+      transform: translateY(-2px);
+    }
+
+    .sport-card.selected {
+      background: linear-gradient(105deg, #1e6fdf, #0b4a9f);
+      border-color: #1e6fdf;
+      color: white;
+      box-shadow: 0 6px 14px rgba(30,111,223,0.3);
+    }
+
+    .sport-card input {
+      display: none;
+    }
+
+    .info-card {
+      background: linear-gradient(105deg, #eef3ff 0%, #e0edfe 100%);
+      border-radius: 28px;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0 1.2rem 0;
+      border-left: 6px solid #2c7be5;
+      font-weight: 500;
+      color: #0a4a7a;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .events-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 0.5rem 0;
+    }
+
+    .event-badge {
+      background: white;
+      border-radius: 40px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e6fdf;
+      border: 1px solid #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .event-badge.special {
+      background: linear-gradient(105deg, #fef3c7, #fde68a);
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
+    .submit-btn {
+      background: linear-gradient(95deg, #1e6fdf, #0b4a9f);
+      border: none;
+      padding: 1.2rem 2rem;
+      width: 100%;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 2rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(95deg, #0f5bc0, #0a3a7a);
+      transform: scale(1.01);
+      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1200;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toast-notification {
+      background: #1e293b;
+      color: white;
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 500;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      animation: slideToast 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: opacity 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .toast-notification.success {
+      background: #0f5f3f;
+      border-left: 5px solid #86efac;
+    }
+
+    .toast-notification.error {
+      background: #9b2c2c;
+      border-left: 5px solid #f87171;
+    }
+
+    @keyframes slideToast {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 460px;
+      width: 90%;
+      border-radius: 56px;
+      padding: 2rem 2rem 2rem 2rem;
+      text-align: center;
+      box-shadow: 0 40px 60px rgba(0, 0, 0, 0.4);
+      animation: modalPop 0.25s ease;
+    }
+
+    @keyframes modalPop {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-content h3 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #0a2540;
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-content p {
+      margin: 1rem 0;
+      color: #2d4a6e;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .modal-btn {
+      background: #1e6fdf;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .modal-btn-outline {
+      background: transparent;
+      border: 1.5px solid #1e6fdf;
+      color: #1e6fdf;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .closing-phrase {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e6fdf;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #cbd5e1;
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 1rem; }
+      .glass-card { padding: 1.5rem; }
+      .top-nav { flex-direction: column; gap: 12px; text-align: center; }
+      .logo-area h1 { font-size: 1.2rem; }
+      .event-title h2 { font-size: 1.6rem; }
+      .section-title { font-size: 1.3rem; }
+      .form-grid { gap: 1.2rem; }
+      .sport-options { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- top navigation with logo and staff login -->
+  <div class="top-nav">
+    <div class="logo-area">
+      <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo">
+      <h1>WARAYA Youth Advocates</h1>
+    </div>
+    <button class="staff-btn" id="staffLoginBtn">⚡ Staff Login →</button>
+  </div>
+
+  <!-- main registration glass card -->
+  <div class="glass-card">
+    <div class="event-title">
+      <h2>🏆 22nd Anniversary Sportsfest</h2>
+      <div class="theme">WARAYA: Champions Beyond Service</div>
+      <div class="tagline">“Together We Play, Together We Lead.”</div>
+    </div>
+    <div class="subhead">Register now and compete with pride — be part of the biggest celebration!</div>
+
+    <form id="registrationForm">
+      <!-- Personal Info -->
+      <div class="section-title">📌 Personal Information</div>
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Full Name (with Middle Initial) *</label>
+          <input type="text" id="fullName" placeholder="e.g., Juan A. Dela Cruz" required>
+          <div class="hint">Format: First Name M.I. Last Name</div>
+        </div>
+        <div class="input-group"><label>Year Joined WARAYA *</label><input type="text" id="yearJoined" placeholder="e.g., 2022" required></div>
+        <div class="input-group"><label>Age *</label><input type="number" id="age" min="15" max="100" required></div>
+      </div>
+
+      <div class="input-group"><label>Membership Status *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="membershipStatus" value="Regular" required> Regular Member</label>
+          <label><input type="radio" name="membershipStatus" value="Emeritus"> Emeritus Member</label>
+        </div>
+      </div>
+
+      <div class="input-group"><label>Gender *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
+          <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group"><label>Complete Address *</label><input type="text" id="address" placeholder="Street, City, Province" required></div>
+        <div class="input-group"><label>Contact Number *</label><input type="tel" id="contactNumber" placeholder="+63 XXX XXX XXXX" required></div>
+      </div>
+
+      <!-- Emergency Contact -->
+      <div class="section-title">🚨 Emergency Contact</div>
+      <div class="form-grid">
+        <div class="input-group"><label>Full Name *</label><input type="text" id="emergencyName" required></div>
+        <div class="input-group"><label>Relationship *</label><input type="text" id="emergencyRelation" placeholder="Parent / Sibling / Friend" required></div>
+        <div class="input-group"><label>Emergency Number *</label><input type="tel" id="emergencyPhone" required></div>
+      </div>
+
+      <!-- Shirt -->
+      <div class="section-title">👕 Shirt Preference</div>
+      <div class="input-group"><label>Preferred Shirt Size</label>
+        <select id="shirtSize">
+          <option value="XS">XS</option><option value="S">S</option><option value="M">M</option>
+          <option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
+        </select>
+      </div>
+      <div class="info-card">📢 “Shirt availability is not yet guaranteed and will still depend on available funding.”</div>
+
+      <!-- Participation - SINGLE SPORT ONLY -->
+      <div class="section-title">Select Sport / Event *</div>
+      <div class="sport-options" id="sportOptionsContainer">
+        <div class="sport-card" data-sport="Pickleball">
+          🏓 Pickleball
+          <input type="radio" name="sport" value="Pickleball">
+        </div>
+        <div class="sport-card" data-sport="Volleyball">
+          🏐 Volleyball
+          <input type="radio" name="sport" value="Volleyball">
+        </div>
+        <div class="sport-card" data-sport="Mobile Legends">
+          📱 Mobile Legends
+          <input type="radio" name="sport" value="Mobile Legends">
+        </div>
+        <div class="sport-card" data-sport="Chess">
+          ♟️ Chess
+          <input type="radio" name="sport" value="Chess">
+        </div>
+        <div class="sport-card" data-sport="Scrabble">
+          🔤 Scrabble
+          <input type="radio" name="sport" value="Scrabble">
+        </div>
+      </div>
+
+      <!-- Special Events Section (View Only) -->
+      <div class="section-title">✨ Special Event</div>
+      <div class="events-list">
+        <div class="event-badge special">👑 Mr. and Ms. Sportsfest 2026</div>
+      </div>
+      <div class="info-card">📋 The organizers will divide the participants into four teams, and each team will be responsible for selecting its official players.</div>
+
+      <div class="info-card">💰 “There is a contribution of 300 Pesos per head that will be collected 2 weeks before the anniversary.”</div>
+
+      <!-- Medical -->
+      <div class="input-group"><label>Medical Condition *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="medicalConditionRadio" id="medicalNone" value="None" checked> None</label>
+          <label><input type="radio" name="medicalConditionRadio" id="medicalYes" value="Yes"> Yes (specify)</label>
+        </div>
+        <div id="medicalConditionField" style="display:none; margin-top: 10px;">
+          <input type="text" id="medicalConditionText" placeholder="Please describe medical condition" style="width:100%">
+        </div>
+      </div>
+
+      <!-- Waiver -->
+      <div class="section-title">📜 Waiver & Consent</div>
+      <label style="display: flex; gap: 14px; align-items: flex-start; margin-bottom: 1rem; background: #f8fafc; padding: 1rem; border-radius: 28px;">
+        <input type="checkbox" id="waiverCheck" style="width: 22px; height: 22px; margin-top: 2px;">
+        <span style="font-size: 0.9rem; font-weight: 500;">“I voluntarily join the WARAYA Anniversary Sportsfest as a member of the organization and understand that the organizers will not be held liable for any injuries, accidents, or loss of personal belongings during the event.”</span>
+      </label>
+      <div class="input-group"><label>Date of Waiver *</label><input type="date" id="waiverDate" required></div>
+      
+      <div class="closing-phrase">
+        Once a WARAYA, Always a WARAYA.
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span>Register for Sportsfest</span>
+        <span id="loadingSpinner" class="loading-spinner" style="display:none;"></span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>🎉 Registration Successful!</h3>
+    <p>You are now officially registered for the 22nd WARAYA Anniversary Sportsfest.<br>See you at the event! ⚡</p>
+    <p style="font-size: 0.9rem; font-style: italic;">✨ Once a WARAYA, Always a WARAYA. ✨</p>
+    <div class="modal-buttons">
+      <button class="modal-btn" id="modalOkBtn">Awesome!</button>
+      <button class="modal-btn modal-btn-outline" id="closeModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
+    authDomain: "waraya-e1de8.firebaseapp.com",
+    projectId: "waraya-e1de8",
+    storageBucket: "waraya-e1de8.firebasestorage.app",
+    messagingSenderId: "140173641530",
+    appId: "1:140173641530:web:7bdacc1c6c55bdf332f203",
+    measurementId: "G-EWG6DBRHSG"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // DOM elements
+  const form = document.getElementById('registrationForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const toastContainer = document.getElementById('toastContainer');
+  const successModal = document.getElementById('successModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const modalOkBtn = document.getElementById('modalOkBtn');
+
+  // Medical conditional
+  const medicalNone = document.getElementById('medicalNone');
+  const medicalYes = document.getElementById('medicalYes');
+  const medicalConditionField = document.getElementById('medicalConditionField');
+  const medicalConditionText = document.getElementById('medicalConditionText');
+
+  // Sport selection UI - single sport only
+  const sportCards = document.querySelectorAll('.sport-card');
+  let selectedSportValue = null;
+
+  function initSportSelection() {
+    sportCards.forEach(card => {
+      const radio = card.querySelector('input[type="radio"]');
+      card.addEventListener('click', () => {
+        sportCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        radio.checked = true;
+        selectedSportValue = radio.value;
+      });
+    });
+  }
+
+  function getSelectedSport() {
+    const selectedRadio = document.querySelector('input[name="sport"]:checked');
+    return selectedRadio ? selectedRadio.value : null;
+  }
+
+  function toggleMedicalField() {
+    if (medicalYes.checked) {
+      medicalConditionField.style.display = 'block';
+      medicalConditionText.required = true;
+    } else {
+      medicalConditionField.style.display = 'none';
+      medicalConditionText.required = false;
+      medicalConditionText.value = '';
+    }
+  }
+
+  medicalNone.addEventListener('change', toggleMedicalField);
+  medicalYes.addEventListener('change', toggleMedicalField);
+  toggleMedicalField();
+  initSportSelection();
+
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerText = message;
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3800);
+  }
+
+  function openSuccessModal() { successModal.classList.add('active'); }
+  function closeSuccessModal() { successModal.classList.remove('active'); }
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeSuccessModal);
+  if (modalOkBtn) modalOkBtn.addEventListener('click', closeSuccessModal);
+
+  document.getElementById('staffLoginBtn')?.addEventListener('click', () => {
+    window.location.href = 'login.html';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const waiverCheckbox = document.getElementById('waiverCheck');
+    if (!waiverCheckbox.checked) {
+      showToast('Please accept the waiver & consent to continue.', 'error');
+      return;
+    }
+
+    const selectedSport = getSelectedSport();
+    if (!selectedSport) {
+      showToast('Please select a sport/event to participate in.', 'error');
+      return;
+    }
+
+    const membershipSelected = document.querySelector('input[name="membershipStatus"]:checked');
+    const genderSelected = document.querySelector('input[name="gender"]:checked');
+    if (!membershipSelected || !genderSelected) {
+      showToast('Please select membership status and gender.', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    loadingSpinner.style.display = 'inline-block';
+
+    try {
+      const userCred = await signInAnonymously(auth);
+      const uid = userCred.user.uid;
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const yearJoined = document.getElementById('yearJoined').value.trim();
+      const age = parseInt(document.getElementById('age').value);
+      const membershipStatus = membershipSelected.value;
+      const gender = genderSelected.value;
+      const address = document.getElementById('address').value.trim();
+      const contactNumber = document.getElementById('contactNumber').value.trim();
+      const emergencyContactName = document.getElementById('emergencyName').value.trim();
+      const emergencyRelationship = document.getElementById('emergencyRelation').value.trim();
+      const emergencyContactNumber = document.getElementById('emergencyPhone').value.trim();
+      const shirtSize = document.getElementById('shirtSize').value;
+      const sportsParticipating = [selectedSport];
+      let medicalCondition = 'None';
+      if (medicalYes.checked) {
+        medicalCondition = medicalConditionText.value.trim() || 'Specified condition';
+      }
+      const waiverDate = document.getElementById('waiverDate').value;
+
+      if (!fullName || !yearJoined || !age || !address || !contactNumber || !emergencyContactName || !emergencyRelationship || !emergencyContactNumber || !waiverDate) {
+        showToast('Please complete all required fields.', 'error');
+        submitBtn.disabled = false;
+        loadingSpinner.style.display = 'none';
+        return;
+      }
+
+      const registrationPayload = {
+        fullName,
+        yearJoined,
+        age,
+        membershipStatus,
+        gender,
+        address,
+        contactNumber,
+        emergencyContactName,
+        emergencyRelationship,
+        emergencyContactNumber,
+        shirtSize,
+        sportsParticipating,
+        medicalCondition,
+        waiverAccepted: true,
+        waiverDate,
+        uid,
+        createdAt: serverTimestamp()
+      };
+
+      await addDoc(collection(db, "sportsfest_registrations"), registrationPayload);
+      showToast('Registration successful! 🎊 Welcome to WARAYA Sportsfest!', 'success');
+      form.reset();
+      medicalNone.checked = true;
+      toggleMedicalField();
+      sportCards.forEach(card => {
+        card.classList.remove('selected');
+        const radio = card.querySelector('input[type="radio"]');
+        if (radio) radio.checked = false;
+      });
+      selectedSportValue = null;
+      document.querySelectorAll('input[name="membershipStatus"]').forEach(rb => rb.checked = false);
+      document.querySelectorAll('input[name="gender"]').forEach(rb => rb.checked = false);
+      waiverCheckbox.checked = false;
+      openSuccessModal();
+    } catch (error) {
+      console.error("Registration error:", error);
+      showToast('Registration failed: ' + error.message, 'error');
+    } finally {
+      submitBtn.disabled = false;
+      loadingSpinner.style.display = 'none';
+    }
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("Anonymous user ready for registration");
+    }
+  });
+</script>
+</body>
+</html>
