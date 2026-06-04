@@ -39,6 +39,8 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.5);
       transition: all 0.3s ease;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .logo-area {
@@ -67,10 +69,15 @@
       letter-spacing: -0.3px;
     }
 
-    .staff-btn {
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
       background: linear-gradient(95deg, #1e3a8a, #1e6fdf);
       border: none;
-      padding: 0.7rem 1.8rem;
+      padding: 0.7rem 1.5rem;
       border-radius: 40px;
       font-weight: 700;
       font-size: 0.9rem;
@@ -79,12 +86,26 @@
       transition: all 0.25s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       letter-spacing: 0.3px;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    .staff-btn:hover {
+    .nav-btn:hover {
       background: linear-gradient(95deg, #0f2b6d, #0b4a9f);
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-btn-outline {
+      background: transparent;
+      border: 2px solid #1e6fdf;
+      color: #1e6fdf;
+    }
+
+    .nav-btn-outline:hover {
+      background: #1e6fdf;
+      color: white;
+      transform: translateY(-2px);
     }
 
     /* ========== GLASS CARD ========== */
@@ -467,12 +488,13 @@
     @media (max-width: 760px) {
       body { padding: 1rem; }
       .glass-card { padding: 1.5rem; }
-      .top-nav { flex-direction: column; gap: 12px; text-align: center; }
+      .top-nav { flex-direction: column; text-align: center; }
       .logo-area h1 { font-size: 1.2rem; }
       .event-title h2 { font-size: 1.6rem; }
       .section-title { font-size: 1.3rem; }
       .form-grid { gap: 1.2rem; }
       .sport-options { grid-template-columns: repeat(2, 1fr); }
+      .nav-buttons { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -484,7 +506,10 @@
       <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo">
       <h1>WARAYA Youth Advocates</h1>
     </div>
-    <button class="staff-btn" id="staffLoginBtn">⚡ Staff Login →</button>
+    <div class="nav-buttons">
+      <button class="nav-btn nav-btn-outline" id="guidelinesBtn">📖 Event Guidelines</button>
+      <button class="nav-btn" id="staffLoginBtn">⚡ Staff Login →</button>
+    </div>
   </div>
 
   <!-- main registration glass card -->
@@ -549,7 +574,7 @@
       <div class="info-card">📢 “Shirt availability is not yet guaranteed and will still depend on available funding.”</div>
 
       <!-- Participation - SINGLE SPORT ONLY -->
-      <div class="section-title">Select Sport / Event *</div>
+      <div class="section-title">🎯 Select Sport / Event *</div>
       <div class="sport-options" id="sportOptionsContainer">
         <div class="sport-card" data-sport="Pickleball">
           🏓 Pickleball
@@ -602,11 +627,11 @@
       <div class="input-group"><label>Date of Waiver *</label><input type="date" id="waiverDate" required></div>
       
       <div class="closing-phrase">
-        Once a WARAYA, Always a WARAYA.
+        ✨ Once a WARAYA, Always a WARAYA. ✨
       </div>
 
       <button type="submit" class="submit-btn" id="submitBtn">
-        <span>Register for Sportsfest</span>
+        <span>🚀 Register for Sportsfest</span>
         <span id="loadingSpinner" class="loading-spinner" style="display:none;"></span>
       </button>
     </form>
@@ -717,8 +742,13 @@
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeSuccessModal);
   if (modalOkBtn) modalOkBtn.addEventListener('click', closeSuccessModal);
 
+  // Navigation buttons
   document.getElementById('staffLoginBtn')?.addEventListener('click', () => {
     window.location.href = 'login.html';
+  });
+
+  document.getElementById('guidelinesBtn')?.addEventListener('click', () => {
+    window.location.href = 'guidelines.html';
   });
 
   form.addEventListener('submit', async (e) => {
