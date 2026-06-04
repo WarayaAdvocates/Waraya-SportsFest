@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="https://wxyzofficial.sirv.com/WARAYA/logo.png">
+  <title>WARAYA Sportsfest 2026 | Official Guidelines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #d9e4ff 100%);
+      min-height: 100vh;
+    }
+
+    /* Navigation Bar */
+    .nav-bar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-area img {
+      height: 45px;
+      width: auto;
+    }
+
+    .logo-area h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: linear-gradient(120deg, #0b3b6b, #1e6fdf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: linear-gradient(95deg, #1e3a8a, #1e6fdf);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-btn:hover {
+      background: linear-gradient(95deg, #0f2b6d, #0b4a9f);
+      transform: translateY(-2px);
+    }
+
+    .nav-btn-outline {
+      background: transparent;
+      border: 2px solid #1e6fdf;
+      color: #1e6fdf;
+    }
+
+    .nav-btn-outline:hover {
+      background: #1e6fdf;
+      color: white;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Header Section */
+    .hero-section {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0b3b6b, #1e6fdf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-section .theme {
+      font-size: 1.2rem;
+      color: #1e6fdf;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-section .tagline {
+      font-size: 1rem;
+      color: #4a627a;
+      font-style: italic;
+    }
+
+    .hero-section .date-venue {
+      background: rgba(30, 111, 223, 0.1);
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #0b3b6b;
+    }
+
+    /* Team Colors Section */
+    .team-colors {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .team-badge {
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .team-water { background: #2563eb; }
+    .team-earth { background: #16a34a; }
+    .team-fire { background: #dc2626; }
+    .team-air { background: #eab308; color: #422006; }
+
+    /* Section Styles */
+    .guidelines-section {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 32px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a3e6d;
+      border-left: 5px solid #1e6fdf;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subsection-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1e6fdf;
+      margin: 1.2rem 0 0.8rem 0;
+      padding-left: 0.5rem;
+      border-left: 3px solid #1e6fdf;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .event-card {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .event-card h4 {
+      color: #1e6fdf;
+      margin-bottom: 0.5rem;
+    }
+
+    .point-system {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .point-card {
+      background: #f0f7ff;
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .point-card h4 {
+      color: #0b3b6b;
+      margin-bottom: 0.5rem;
+    }
+
+    .criteria-table {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #1e6fdf;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .rule-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .rule-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .rule-list li::before {
+      content: "•";
+      color: #1e6fdf;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .rule-number {
+      font-weight: 700;
+      color: #1e6fdf;
+      margin-right: 0.5rem;
+    }
+
+    .program-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    .program-item {
+      background: #f1f5f9;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 32px;
+      margin-top: 2rem;
+    }
+
+    .footer-note p {
+      color: #4a627a;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .hero-section h1 { font-size: 1.8rem; }
+      .section-title { font-size: 1.3rem; }
+      .nav-bar { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="nav-bar">
+  <div class="logo-area">
+    <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA Logo">
+    <h1>WARAYA Youth Advocates</h1>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn nav-btn-outline">🏠 Registration</a>
+    <a href="login.html" class="nav-btn">⚡ Staff Login</a>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <h1>🏆 22nd Anniversary Sportsfest</h1>
+    <div class="theme">WARAYA: Champions Beyond Service</div>
+    <div class="tagline">“Together We Play, Together We Lead.”</div>
+    <div class="date-venue">📅 July 4, 2026 | 📍 Samar Provincial Gymnasium</div>
+  </div>
+
+  <!-- Team Colors -->
+  <div class="team-colors">
+    <div class="team-badge team-water">💧 Water Tribe - Blue</div>
+    <div class="team-badge team-earth">🌍 Earth Kingdom - Green</div>
+    <div class="team-badge team-fire">🔥 Fire Nation - Red</div>
+    <div class="team-badge team-air">🍃 Air Nomads - Yellow</div>
+  </div>
+
+  <!-- General Information -->
+  <div class="guidelines-section">
+    <h2 class="section-title">📋 General Information</h2>
+    <ul class="rule-list">
+      <li>The Sportsfest is themed after <strong>Avatar: The Last Airbender</strong>, featuring four (4) competing teams, each representing one of the four nations.</li>
+      <li>Each team may produce and wear its own team shirt with its assigned team color. All members are encouraged to wear designated team colors.</li>
+      <li>All emeritus and regular members shall be divided into four (4) groups based on total registrants.</li>
+      <li>The <strong>Technical Working Group (TWG)</strong> shall determine team composition and assign participants.</li>
+      <li>The TWG shall not be part of the competing teams and serves solely as the organizing body.</li>
+      <li>Each team shall designate a <strong>Team Leader</strong> and identify official players for each game category.</li>
+    </ul>
+  </div>
+
+  <!-- Registration and Participation -->
+  <div class="guidelines-section">
+    <h2 class="section-title">📝 Registration and Participation</h2>
+    <ul class="rule-list">
+      <li><strong>Online Registration:</strong> June 4 to June 14, 2026</li>
+      <li><strong>Team Composition Release:</strong> June 15, 2026 via official social media platforms</li>
+      <li><strong>Orientation with Team Leaders:</strong> June 20, 2026</li>
+      <li><strong>Finalization of Official Players:</strong> June 27, 2026</li>
+      <li>Each participant must join at least one (1) morning game (Chess, Scrabble, Pickleball, or Mobile Legends).</li>
+      <li>Mr. and Ms. Sportsfest participants are exempted from the morning game requirement.</li>
+      <li>Each participant shall contribute <strong>₱300.00</strong> for annual contribution (logistics, certificates, event expenses).</li>
+    </ul>
+  </div>
+
+  <!-- Events and Person-in-Charge -->
+  <div class="guidelines-section">
+    <h2 class="section-title">🎯 Events and Person-in-Charge</h2>
+    <div class="event-grid">
+      <div class="event-card"><h4>🏓 Pickleball</h4><p>Trisha and Melvin</p></div>
+      <div class="event-card"><h4>🏐 Volleyball</h4><p>Joshua</p></div>
+      <div class="event-card"><h4>📱 Mobile Legends</h4><p>Marvin</p></div>
+      <div class="event-card"><h4>♟️ Chess</h4><p>Ben</p></div>
+      <div class="event-card"><h4>🔤 Scrabble</h4><p>Calley</p></div>
+      <div class="event-card"><h4>👑 Mr. & Ms. Sportsfest</h4><p>Christian</p></div>
+    </div>
+  </div>
+
+  <!-- Point System -->
+  <div class="guidelines-section">
+    <h2 class="section-title">🏅 Point System</h2>
+    <div class="point-system">
+      <div class="point-card"><h4>Volleyball & Mobile Legends</h4><p>1st: 200 pts<br>2nd: 170 pts<br>3rd: 150 pts<br>4th: 130 pts</p></div>
+      <div class="point-card"><h4>Pickleball, Mr. & Ms. Sportsfest & Attendance</h4><p>1st: 150 pts<br>2nd: 120 pts<br>3rd: 100 pts<br>4th: 80 pts</p></div>
+      <div class="point-card"><h4>Chess, Scrabble & Team Cheer</h4><p>1st: 100 pts<br>2nd: 70 pts<br>3rd: 50 pts<br>4th: 30 pts</p></div>
+    </div>
+    <p style="margin-top: 1rem;"><strong>Overall Champion</strong> is determined by total accumulated points from all events.</p>
+    <p>Winners receive <strong>Customized WARAYA Pins</strong> and certificates of recognition.</p>
+  </div>
+
+  <!-- Program Sequence -->
+  <div class="guidelines-section">
+    <h2 class="section-title">📅 Program Sequence</h2>
+    <div class="program-list">
+      <div class="program-item">1. Parade and Recognition of Teams</div>
+      <div class="program-item">2. PNA</div>
+      <div class="program-item">3. Prayer</div>
+      <div class="program-item">4. Opening Message</div>
+      <div class="program-item">5. Oath of Sportsmanship</div>
+      <div class="program-item">6. Lighting of the Cauldron</div>
+      <div class="program-item">7. Photo Opportunity</div>
+      <div class="program-item">8. Mister and Miss Sportsfest</div>
+      <div class="program-item">9. Simultaneous Games (Chess, Scrabble, ML, Pickleball)</div>
+      <div class="program-item">10. Afternoon Game (Volleyball)</div>
+      <div class="program-item">11. Closing Ceremony</div>
+      <div class="program-item">12. Accomplishment Report</div>
+      <div class="program-item">13. Awarding Ceremony</div>
+      <div class="program-item">14. Photo Opportunity</div>
+      <div class="program-item">15. Social Night</div>
+    </div>
+  </div>
+
+  <!-- Team Cheer Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">📣 Team Cheer Presentation</h2>
+    <ul class="rule-list">
+      <li>Each team shall prepare a Cheer Presentation (1-2 minutes duration).</li>
+      <li>One (1) minute preparation time at the center of the venue.</li>
+      <li>TWG shall provide official music/song sent at least one week before the event.</li>
+      <li>May include dance movements, yells, chants, formations synchronized with music.</li>
+      <li>Hand-held props, banners, backdrops allowed.</li>
+      <li><strong>Prohibited:</strong> motorized vehicles, pyrotechnics, fire-based props, oil, party poppers, smoke effects, live animals.</li>
+      <li>Must observe proper decorum; no offensive or inappropriate content.</li>
+    </ul>
+    <div class="criteria-table">
+      <h3 class="subsection-title">Criteria for Judging (Team Cheer)</h3>
+      <table>
+        <tr><th>Criteria</th><th>Weight</th></tr>
+        <tr><td>Choreography</td><td>50%</td></tr>
+        <tr><td>Performance (Synchronization and Mastery)</td><td>40%</td></tr>
+        <tr><td>Overall Impact</td><td>10%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Mr. and Ms. Sportsfest Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">👑 Mr. and Ms. Sportsfest Guidelines</h2>
+    <h3 class="subsection-title">Eligibility</h3>
+    <ul class="rule-list">
+      <li>Each team must field exactly two (2) official candidates.</li>
+      <li>Candidates must be official members of their respective teams.</li>
+      <li>Open to all qualified participants regardless of age and SOGIE.</li>
+    </ul>
+    <h3 class="subsection-title">Competition Segments</h3>
+    <ul class="rule-list">
+      <li><strong>Production Number</strong> - synchronized opening performance</li>
+      <li><strong>Sports Attire Competition</strong> - showcase confidence and athletic excellence</li>
+      <li><strong>Question and Answer (Q&A) Portion</strong> - focus on organization history, vision, mission, core values</li>
+    </ul>
+    <h3 class="subsection-title">Attire Requirements</h3>
+    <ul class="rule-list">
+      <li><strong>Production Number:</strong> Official team t-shirt + appropriate pants (jeans, joggers, athletic pants)</li>
+      <li><strong>Sports Attire:</strong> Any sports attire representing a recognized sport; handheld sports equipment allowed</li>
+    </ul>
+    <div class="criteria-table">
+      <h3 class="subsection-title">Criteria for Judging</h3>
+      <table>
+        <tr><th>Segment</th><th>Criteria</th><th>Weight</th></tr>
+        <tr><td>Production Number</td><td>Stage Presence (10%), Confidence (10%), Overall Performance (10%)</td><td>30%</td></tr>
+        <tr><td>Sports Attire</td><td>Stage Presence (15%), Creativity (20%), Overall Performance (5%)</td><td>40%</td></tr>
+        <tr><td>Q&A Portion</td><td>Content (10%), Communication (10%), Confidence (10%)</td><td>30%</td></tr>
+      </table>
+    </div>
+    <h3 class="subsection-title">Awards</h3>
+    <ul class="rule-list">
+      <li>Mr. Sportsfest 2026</li>
+      <li>Ms. Sportsfest 2026</li>
+      <li>1st, 2nd, 3rd Runner-Up</li>
+      <li>Best in Production Number</li>
+      <li>Best in Sports Attire</li>
+    </ul>
+  </div>
+
+  <!-- Volleyball Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">🏐 Volleyball Guidelines (Mixed Category)</h2>
+    <ul class="rule-list">
+      <li>Minimum of ten (10) members per team (any gender).</li>
+      <li>Six (6) main players on court; four (4) substitutes.</li>
+      <li><strong>Round Robin Format</strong> (4 teams) → 6 matches total.</li>
+      <li>Top 2 teams → Championship Match; 3rd & 4th → Battle for 3rd Place.</li>
+      <li><strong>Scoring:</strong> Best-of-3 sets, each set to 16 points (must win by 2).</li>
+      <li>Two (2) timeouts per set allowed.</li>
+      <li>Players must wear proper sports attire; knee pads highly recommended.</li>
+      <li>Based on FIVB Rule Book.</li>
+    </ul>
+  </div>
+
+  <!-- Mobile Legends Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">📱 Mobile Legends Guidelines</h2>
+    <ul class="rule-list">
+      <li>Each team: Five (5) main players + One (1) substitute.</li>
+      <li>No replacement allowed once registered.</li>
+      <li><strong>Round Robin Format</strong> (4 teams).</li>
+      <li>Top 2 → Championship Match; 3rd & 4th → Battle for 3rd.</li>
+      <li>Two (2) team pauses + One (1) technical pause per match.</li>
+      <li>15-minute grace period; failure to report results in forfeit.</li>
+      <li>Players must ensure stable internet connection.</li>
+    </ul>
+  </div>
+
+  <!-- Scrabble Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">🔤 Scrabble Guidelines</h2>
+    <ul class="rule-list">
+      <li>Each team designates one (1) official representative.</li>
+      <li>Round Robin Format; highest match points declared Champion.</li>
+      <li>Standard 15×15 board with 100 tiles (including two blank tiles).</li>
+      <li>Two (2) minutes per turn; failure to play results in forfeiture.</li>
+      <li>All words must be valid English words (no proper nouns, abbreviations).</li>
+      <li>Fifty (50)-point bonus for using all seven (7) tiles in one turn.</li>
+      <li>No dictionaries, mobile phones, or electronic devices allowed.</li>
+      <li><strong>Scoring:</strong> Win = 3 pts, Draw = 1 pt, Loss = 0 pts</li>
+      <li>Tie-breakers: Highest cumulative score → Head-to-head → Tie-breaker match</li>
+    </ul>
+  </div>
+
+  <!-- Pickleball Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">🏓 Pickleball Guidelines</h2>
+    <ul class="rule-list">
+      <li>Three categories: <strong>Men's Doubles, Women's Doubles, Mixed Doubles</strong></li>
+      <li>Open to all players regardless of age and skill level.</li>
+      <li>A player may participate in only one (1) category.</li>
+      <li>Match schedules posted via <strong>Reclub application</strong>.</li>
+      <li>Ten (10)-minute grace period; failure to appear results in default.</li>
+      <li>Governed by official Pickleball rules.</li>
+    </ul>
+  </div>
+
+  <!-- Chess Guidelines -->
+  <div class="guidelines-section">
+    <h2 class="section-title">♟️ Chess Tournament Guidelines (Standard Category)</h2>
+    <ul class="rule-list">
+      <li>Four (4) teams, each with one (1) official representative.</li>
+      <li>Single Round Robin System (6 matches total).</li>
+      <li>Follows official <strong>FIDE Standard Chess Rules</strong>.</li>
+      <li><strong>Time Control:</strong> 10-15 minutes per player.</li>
+      <li><strong>Scoring:</strong> Win = 1 pt, Draw = 0.5 pt, Loss = 0 pt</li>
+      <li>Touch-move rule applies.</li>
+      <li>Tie-breakers: Head-to-head → Number of wins → Sonneborn-Berger → Playoff</li>
+    </ul>
+  </div>
+
+  <!-- Final Provision -->
+  <div class="guidelines-section">
+    <h2 class="section-title">⚖️ Final Provision</h2>
+    <p>The Organizing Committee reserves the right to amend, modify, or revise these guidelines as may be necessary to ensure the smooth, orderly, and fair conduct of the tournament.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-note">
+    <p>✨ “Once a WARAYA, Always a WARAYA.” ✨</p>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;">For questions and concerns, please contact your Team Leader or the Technical Working Group.</p>
+  </div>
+</div>
+
+</body>
+</html>
