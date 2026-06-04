@@ -269,6 +269,16 @@
       display: none;
     }
 
+    .selection-info {
+      font-size: 0.75rem;
+      color: #1e6fdf;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      background: #eef3ff;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
     .info-card {
       background: linear-gradient(105deg, #eef3ff 0%, #e0edfe 100%);
       border-radius: 28px;
@@ -567,36 +577,42 @@
       <div class="section-title">👕 Shirt Preference</div>
       <div class="input-group"><label>Preferred Shirt Size</label>
         <select id="shirtSize">
-          <option value="XS">XS</option><option value="S">S</option><option value="M">M</option>
-          <option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+          <option value="XXXL">XXXL</option>
         </select>
       </div>
       <div class="info-card">📢 “Shirt availability is not yet guaranteed and will still depend on available funding.”</div>
 
-      <!-- Participation - SINGLE SPORT ONLY -->
-      <div class="section-title">🎯 Select Sport / Event *</div>
+      <!-- Participation - MULTIPLE SPORTS SELECTION (Max 2) -->
+      <div class="section-title">🎯 Select Sport / Event * (Max 2)</div>
       <div class="sport-options" id="sportOptionsContainer">
         <div class="sport-card" data-sport="Pickleball">
           🏓 Pickleball
-          <input type="radio" name="sport" value="Pickleball">
+          <input type="checkbox" name="sport" value="Pickleball" style="display: none;">
         </div>
         <div class="sport-card" data-sport="Volleyball">
           🏐 Volleyball
-          <input type="radio" name="sport" value="Volleyball">
+          <input type="checkbox" name="sport" value="Volleyball" style="display: none;">
         </div>
         <div class="sport-card" data-sport="Mobile Legends">
           📱 Mobile Legends
-          <input type="radio" name="sport" value="Mobile Legends">
+          <input type="checkbox" name="sport" value="Mobile Legends" style="display: none;">
         </div>
         <div class="sport-card" data-sport="Chess">
           ♟️ Chess
-          <input type="radio" name="sport" value="Chess">
+          <input type="checkbox" name="sport" value="Chess" style="display: none;">
         </div>
         <div class="sport-card" data-sport="Scrabble">
           🔤 Scrabble
-          <input type="radio" name="sport" value="Scrabble">
+          <input type="checkbox" name="sport" value="Scrabble" style="display: none;">
         </div>
       </div>
+      <div class="selection-info" id="selectionInfo">✓ Select up to 2 sports</div>
 
       <!-- Special Events Section (View Only) -->
       <div class="section-title">✨ Special Event</div>
@@ -689,25 +705,61 @@
   const medicalConditionField = document.getElementById('medicalConditionField');
   const medicalConditionText = document.getElementById('medicalConditionText');
 
-  // Sport selection UI - single sport only
+  // Sport selection - MULTIPLE SELECTION (Max 2)
   const sportCards = document.querySelectorAll('.sport-card');
-  let selectedSportValue = null;
+  const selectionInfo = document.getElementById('selectionInfo');
+  let selectedSports = [];
+
+  function updateSportSelection() {
+    sportCards.forEach(card => {
+      const checkbox = card.querySelector('input[type="checkbox"]');
+      if (selectedSports.includes(checkbox.value)) {
+        card.classList.add('selected');
+        checkbox.checked = true;
+      } else {
+        card.classList.remove('selected');
+        checkbox.checked = false;
+      }
+    });
+    
+    const remaining = 2 - selectedSports.length;
+    if (remaining > 0) {
+      selectionInfo.innerHTML = `✓ You can select ${remaining} more sport(s)`;
+      selectionInfo.style.color = "#1e6fdf";
+    } else {
+      selectionInfo.innerHTML = `✓ Maximum of 2 sports selected`;
+      selectionInfo.style.color = "#059669";
+    }
+  }
 
   function initSportSelection() {
     sportCards.forEach(card => {
-      const radio = card.querySelector('input[type="radio"]');
-      card.addEventListener('click', () => {
-        sportCards.forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        radio.checked = true;
-        selectedSportValue = radio.value;
+      const checkbox = card.querySelector('input[type="checkbox"]');
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const sportValue = checkbox.value;
+        
+        if (checkbox.checked) {
+          // Trying to uncheck
+          const index = selectedSports.indexOf(sportValue);
+          if (index > -1) {
+            selectedSports.splice(index, 1);
+          }
+        } else {
+          // Trying to check
+          if (selectedSports.length >= 2) {
+            showToast('You can only select up to 2 sports per participant.', 'error');
+            return;
+          }
+          selectedSports.push(sportValue);
+        }
+        updateSportSelection();
       });
     });
   }
 
-  function getSelectedSport() {
-    const selectedRadio = document.querySelector('input[name="sport"]:checked');
-    return selectedRadio ? selectedRadio.value : null;
+  function getSelectedSports() {
+    return selectedSports;
   }
 
   function toggleMedicalField() {
@@ -760,9 +812,9 @@
       return;
     }
 
-    const selectedSport = getSelectedSport();
-    if (!selectedSport) {
-      showToast('Please select a sport/event to participate in.', 'error');
+    const selectedSportsList = getSelectedSports();
+    if (selectedSportsList.length === 0) {
+      showToast('Please select at least one sport/event to participate in.', 'error');
       return;
     }
 
@@ -791,7 +843,7 @@
       const emergencyRelationship = document.getElementById('emergencyRelation').value.trim();
       const emergencyContactNumber = document.getElementById('emergencyPhone').value.trim();
       const shirtSize = document.getElementById('shirtSize').value;
-      const sportsParticipating = [selectedSport];
+      const sportsParticipating = selectedSportsList;
       let medicalCondition = 'None';
       if (medicalYes.checked) {
         medicalCondition = medicalConditionText.value.trim() || 'Specified condition';
@@ -830,12 +882,9 @@
       form.reset();
       medicalNone.checked = true;
       toggleMedicalField();
-      sportCards.forEach(card => {
-        card.classList.remove('selected');
-        const radio = card.querySelector('input[type="radio"]');
-        if (radio) radio.checked = false;
-      });
-      selectedSportValue = null;
+      // Reset sport selection
+      selectedSports = [];
+      updateSportSelection();
       document.querySelectorAll('input[name="membershipStatus"]').forEach(rb => rb.checked = false);
       document.querySelectorAll('input[name="gender"]').forEach(rb => rb.checked = false);
       waiverCheckbox.checked = false;
