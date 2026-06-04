@@ -58,6 +58,7 @@
     .nav-links {
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .nav-btn {
@@ -88,6 +89,15 @@
     .nav-btn-outline:hover {
       background: #1e6fdf;
       color: white;
+    }
+
+    .pdf-btn {
+      background: #dc2626;
+      border: none;
+    }
+
+    .pdf-btn:hover {
+      background: #b91c1c;
     }
 
     /* Main Container */
@@ -134,6 +144,34 @@
       margin-top: 1rem;
       font-weight: 500;
       color: #0b3b6b;
+    }
+
+    /* PDF Download Button */
+    .pdf-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(95deg, #dc2626, #b91c1c);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-pdf:hover {
+      background: linear-gradient(95deg, #b91c1c, #991b1b);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     /* Team Colors Section */
@@ -317,6 +355,7 @@
       .hero-section h1 { font-size: 1.8rem; }
       .section-title { font-size: 1.3rem; }
       .nav-bar { flex-direction: column; text-align: center; }
+      .nav-links { justify-content: center; }
     }
   </style>
 </head>
@@ -331,6 +370,7 @@
   <div class="nav-links">
     <a href="index.html" class="nav-btn nav-btn-outline">🏠 Registration</a>
     <a href="login.html" class="nav-btn">⚡ Staff Login</a>
+    <button class="nav-btn pdf-btn" id="viewFullPdfBtn">📄 View Full PDF Guidelines</button>
   </div>
 </div>
 
@@ -341,6 +381,13 @@
     <div class="theme">WARAYA: Champions Beyond Service</div>
     <div class="tagline">“Together We Play, Together We Lead.”</div>
     <div class="date-venue">📅 July 4, 2026 | 📍 Samar Provincial Gymnasium</div>
+  </div>
+
+  <!-- PDF Download Button -->
+  <div class="pdf-container">
+    <button class="btn-pdf" id="downloadPdfBtn">
+      📄 Download Complete Guidelines (PDF)
+    </button>
   </div>
 
   <!-- Team Colors -->
@@ -572,5 +619,27 @@
   </div>
 </div>
 
+<script>
+  // PDF URL
+  const PDF_URL = "https://johnstevenwaraya.sirv.com/WARAYA/WARAYA%20SPORTSFEST%20FINAL%20GUIDELINES%20.pdf";
+
+  // Get button elements
+  const viewFullPdfBtn = document.getElementById('viewFullPdfBtn');
+  const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+
+  // Function to open PDF in new tab
+  function openPdfInNewTab() {
+    window.open(PDF_URL, '_blank');
+  }
+
+  // Add event listeners to both buttons
+  if (viewFullPdfBtn) {
+    viewFullPdfBtn.addEventListener('click', openPdfInNewTab);
+  }
+
+  if (downloadPdfBtn) {
+    downloadPdfBtn.addEventListener('click', openPdfInNewTab);
+  }
+</script>
 </body>
 </html>
