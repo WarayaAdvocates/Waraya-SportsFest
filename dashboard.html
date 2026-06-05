@@ -35,6 +35,10 @@
       overflow-y: auto;
     }
 
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
     .sidebar .logo-area {
       text-align: center;
       margin-bottom: 2rem;
@@ -167,11 +171,12 @@
       color: #0a2540;
     }
 
-    .registrations-panel {
+    .registrations-panel, .team-assignment-panel {
       background: white;
       border-radius: 32px;
       padding: 1.5rem;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      margin-bottom: 2rem;
     }
 
     .filter-bar {
@@ -298,6 +303,111 @@
       background: #d0e6ff;
     }
 
+    .team-badge-sm {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .team-water-sm { background: #2563eb; color: white; }
+    .team-earth-sm { background: #16a34a; color: white; }
+    .team-fire-sm { background: #dc2626; color: white; }
+    .team-air-sm { background: #eab308; color: #422006; }
+    .team-unassigned { background: #9ca3af; color: white; }
+
+    .sport-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+
+    .sport-tab {
+      background: #f1f5f9;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      color: #4a627a;
+    }
+
+    .sport-tab.active {
+      background: #1e6fdf;
+      color: white;
+    }
+
+    .sport-tab:hover {
+      background: #cbd5e1;
+    }
+
+    .team-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .team-card {
+      background: #f8fafc;
+      border-radius: 24px;
+      padding: 1.2rem;
+      border-left: 6px solid;
+      transition: transform 0.2s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .team-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .team-card .member-count {
+      font-size: 0.7rem;
+      color: #4a627a;
+      margin-bottom: 0.8rem;
+    }
+
+    .team-card ul {
+      list-style: none;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .team-card li {
+      padding: 6px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-from-team {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 20px;
+    }
+
+    .remove-from-team:hover {
+      background: #fee2e2;
+    }
+
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -367,9 +477,6 @@
       .sidebar {
         transform: translateX(-100%);
       }
-      .sidebar.open {
-        transform: translateX(0);
-      }
       .main-content {
         margin-left: 0;
         width: 100%;
@@ -380,6 +487,12 @@
       }
       .widgets-grid {
         grid-template-columns: 1fr 1fr;
+      }
+      .team-cards {
+        grid-template-columns: 1fr;
+      }
+      .sport-tabs {
+        justify-content: center;
       }
     }
 
@@ -411,18 +524,38 @@
       border-radius: 20px;
       display: inline-block;
     }
+
+    /* Close sidebar button for mobile */
+    .close-sidebar {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 860px) {
+      .close-sidebar {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="closeSidebarBtn">✕</button>
   <div class="logo-area">
     <img src="https://wxyzofficial.sirv.com/WARAYA/logo.png" alt="WARAYA">
     <h3>WARAYA Sportsfest</h3>
   </div>
   <nav>
     <a href="#" data-section="dashboard" class="active">📊 Dashboard</a>
-    <!-- <a href="#" data-section="registrations">📋 Registrations</a> -->
+    <a href="#" data-section="teamAssignment">🏆 Team Assignment</a>
     <a href="#" data-section="statistics">📈 Statistics</a>
     <a href="#" id="logoutBtn">🚪 Logout</a>
   </nav>
@@ -437,6 +570,7 @@
     </div>
   </div>
 
+  <!-- DASHBOARD SECTION -->
   <div id="dashboardSection">
     <div class="widgets-grid" id="widgetsContainer">
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">—</div></div>
@@ -502,15 +636,38 @@
       <div class="table-wrapper">
         <table id="registrationsTable">
           <thead>
-            <tr><th>Full Name</th><th>Age</th><th>Year Joined</th><th>Membership</th><th>Gender</th><th>Sports</th><th>Shirt</th><th>Contact</th><th>Registered</th><th>Actions</th></tr>
+            <tr><th>Full Name</th><th>Age</th><th>Year Joined</th><th>Membership</th><th>Gender</th><th>Sports</th><th>Shirt</th><th>Contact</th><th>Team</th><th>Actions</th></tr>
           </thead>
-          <tbody id="tableBody"><tr><td colspan="10" class="empty-state">Loading registrations...</td></tr>
+          <tbody id="tableBody"><tr><td colspan="10" class="empty-state">Loading registrations......</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
+  <!-- TEAM ASSIGNMENT SECTION -->
+  <div id="teamAssignmentSection" style="display: none;">
+    <div class="team-assignment-panel">
+      <h3 style="margin-bottom: 0.5rem;">🏆 Team Assignment Per Sport</h3>
+      <p style="margin-bottom: 1rem; color: #4a627a;">Assign participants to the four nations based on the Avatar: The Last Airbender theme. Select a sport below to view and assign players for that specific event.</p>
+      
+      <!-- Sport Tabs -->
+      <div class="sport-tabs" id="sportTabs">
+        <button class="sport-tab active" data-sport="all">🏆 All Participants</button>
+        <button class="sport-tab" data-sport="Pickleball">🏓 Pickleball</button>
+        <button class="sport-tab" data-sport="Volleyball">🏐 Volleyball</button>
+        <button class="sport-tab" data-sport="Mobile Legends">📱 Mobile Legends</button>
+        <button class="sport-tab" data-sport="Chess">♟️ Chess</button>
+        <button class="sport-tab" data-sport="Scrabble">🔤 Scrabble</button>
+      </div>
+      
+      <div class="team-cards" id="teamCardsContainer">
+        <!-- Team cards will be dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- STATISTICS SECTION -->
   <div id="statisticsSection" style="display: none;">
     <div class="stats-container">
       <div class="chart-card"><canvas id="genderChart"></canvas></div>
@@ -527,7 +684,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
@@ -545,21 +702,34 @@
 
   let allRegistrations = [];
   let charts = { gender: null, sport: null, shirt: null };
+  let currentSportFilter = "all";
+  
+  const teams = [
+    { id: "water", name: "Water Tribe", color: "#2563eb", bgLight: "#e0f0ff", icon: "💧" },
+    { id: "earth", name: "Earth Kingdom", color: "#16a34a", bgLight: "#e0f7e8", icon: "🌍" },
+    { id: "fire", name: "Fire Nation", color: "#dc2626", bgLight: "#fee2e2", icon: "🔥" },
+    { id: "air", name: "Air Nomads", color: "#eab308", bgLight: "#fef3c7", icon: "🍃" }
+  ];
 
-  const dashboardSection = document.getElementById('dashboardSection');
-  const statisticsSection = document.getElementById('statisticsSection');
-  const tableBody = document.getElementById('tableBody');
-  const widgetsContainer = document.getElementById('widgetsContainer');
-  const searchInput = document.getElementById('searchNameInput');
-  const ageFilter = document.getElementById('ageFilterSelect');
-  const membershipFilter = document.getElementById('membershipFilterSelect');
-  const yearJoinedFilter = document.getElementById('yearJoinedFilterSelect');
-  const sportFilter = document.getElementById('sportFilterSelect');
-  const exportBtn = document.getElementById('exportCsvBtn');
-  const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-  const filterStatsDiv = document.getElementById('filterStats');
-  const modalOverlay = document.getElementById('detailModal');
-  const modalContent = document.getElementById('modalContent');
+  const DOM = {
+    dashboardSection: document.getElementById('dashboardSection'),
+    teamAssignmentSection: document.getElementById('teamAssignmentSection'),
+    statisticsSection: document.getElementById('statisticsSection'),
+    tableBody: document.getElementById('tableBody'),
+    widgetsContainer: document.getElementById('widgetsContainer'),
+    searchInput: document.getElementById('searchNameInput'),
+    ageFilter: document.getElementById('ageFilterSelect'),
+    membershipFilter: document.getElementById('membershipFilterSelect'),
+    yearJoinedFilter: document.getElementById('yearJoinedFilterSelect'),
+    sportFilter: document.getElementById('sportFilterSelect'),
+    exportBtn: document.getElementById('exportCsvBtn'),
+    clearFiltersBtn: document.getElementById('clearFiltersBtn'),
+    filterStatsDiv: document.getElementById('filterStats'),
+    modalOverlay: document.getElementById('detailModal'),
+    modalContent: document.getElementById('modalContent'),
+    teamCardsContainer: document.getElementById('teamCardsContainer'),
+    sportTabs: document.getElementById('sportTabs')
+  };
 
   function showToast(message, isError = false) {
     const toast = document.createElement('div');
@@ -570,53 +740,216 @@
     setTimeout(() => toast.remove(), 3000);
   }
 
+  async function updateParticipantTeam(participantId, teamId, sportEvent = null) {
+    try {
+      const participant = allRegistrations.find(r => r.id === participantId);
+      if (!participant) return;
+      
+      let currentAssignments = participant.teamAssignments || {};
+      
+      if (sportEvent && sportEvent !== "all") {
+        // Assign for specific sport
+        currentAssignments[sportEvent] = teamId;
+      } else {
+        // Assign for all sports or clear
+        if (teamId === null) {
+          currentAssignments = {};
+        } else {
+          // Assign to all sports the participant is registered for
+          if (participant.sportsParticipating) {
+            participant.sportsParticipating.forEach(sport => {
+              currentAssignments[sport] = teamId;
+            });
+          }
+        }
+      }
+      
+      await updateDoc(doc(db, "sportsfest_registrations", participantId), { teamAssignments: currentAssignments });
+      
+      // Update local data
+      const index = allRegistrations.findIndex(r => r.id === participantId);
+      if (index !== -1) {
+        allRegistrations[index].teamAssignments = currentAssignments;
+      }
+      
+      renderTable();
+      renderTeamCards();
+      showToast(`Team assignment updated successfully`);
+    } catch (error) {
+      console.error("Error updating team:", error);
+      showToast("Failed to update team", true);
+    }
+  }
+
+  function getParticipantTeamForSport(participant, sportEvent) {
+    if (!participant.teamAssignments) return null;
+    if (sportEvent === "all") {
+      // Return any assigned team (prefer the one from their first sport)
+      if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
+        for (const sport of participant.sportsParticipating) {
+          if (participant.teamAssignments[sport]) return participant.teamAssignments[sport];
+        }
+      }
+      return null;
+    }
+    return participant.teamAssignments[sportEvent] || null;
+  }
+
+  function renderTeamCards() {
+    const sportFilter = currentSportFilter;
+    
+    // Get participants who are registered for this sport (or all participants)
+    let participantsToShow = allRegistrations;
+    if (sportFilter !== "all") {
+      participantsToShow = allRegistrations.filter(p => 
+        p.sportsParticipating && p.sportsParticipating.includes(sportFilter)
+      );
+    }
+    
+    // Group participants by team for this specific sport
+    const teamMembers = {
+      water: [],
+      earth: [],
+      fire: [],
+      air: [],
+      unassigned: []
+    };
+    
+    participantsToShow.forEach(p => {
+      const assignedTeam = getParticipantTeamForSport(p, sportFilter);
+      if (assignedTeam && teamMembers[assignedTeam]) {
+        teamMembers[assignedTeam].push(p);
+      } else {
+        teamMembers.unassigned.push(p);
+      }
+    });
+    
+    let html = '';
+    teams.forEach(team => {
+      const members = teamMembers[team.id] || [];
+      html += `
+        <div class="team-card" style="border-left-color: ${team.color};">
+          <h4>${team.icon} ${team.name}</h4>
+          <div class="member-count">${members.length} participants</div>
+          <ul>
+            ${members.map(m => `
+              <li>
+                <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
+                <button class="remove-from-team" data-id="${m.id}" data-team="${team.id}" data-sport="${sportFilter}">✖</button>
+              </li>
+            `).join('')}
+            ${members.length === 0 ? '<li style="color: #9ca3af;">No participants assigned yet</li>' : ''}
+          </ul>
+        </div>
+      `;
+    });
+    
+    // Add unassigned section
+    const unassigned = teamMembers.unassigned || [];
+    html += `
+      <div class="team-card" style="border-left-color: #9ca3af;">
+        <h4>❓ Unassigned</h4>
+        <div class="member-count">${unassigned.length} participants</div>
+        <ul>
+          ${unassigned.map(m => `
+            <li>
+              <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
+              <div style="display: flex; gap: 4px;">
+                ${teams.map(t => `<button class="action-btn assign-quick" data-id="${m.id}" data-team="${t.id}" data-sport="${sportFilter}" style="background: ${t.color}; color: white; padding: 2px 6px; margin: 0 2px; font-size: 0.6rem;">${t.icon}</button>`).join('')}
+              </div>
+            </li>
+          `).join('')}
+          ${unassigned.length === 0 ? '<li style="color: #9ca3af;">All participants assigned</li>' : ''}
+        </ul>
+      </div>
+    `;
+    
+    DOM.teamCardsContainer.innerHTML = html;
+    
+    // Add event listeners
+    document.querySelectorAll('.assign-team-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const teamId = btn.getAttribute('data-team');
+        const sportEvent = btn.getAttribute('data-sport');
+        const unassignedList = allRegistrations.filter(p => !getParticipantTeamForSport(p, sportEvent));
+        
+        if (unassignedList.length === 0) {
+          showToast("No unassigned participants to add", true);
+          return;
+        }
+        
+        for (const p of unassignedList.slice(0, 5)) {
+          await updateParticipantTeam(p.id, teamId, sportEvent === "all" ? null : sportEvent);
+        }
+        renderTeamCards();
+        renderTable();
+      });
+    });
+    
+    document.querySelectorAll('.assign-quick').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        const teamId = btn.getAttribute('data-team');
+        const sportEvent = btn.getAttribute('data-sport');
+        await updateParticipantTeam(id, teamId, sportEvent === "all" ? null : sportEvent);
+        renderTeamCards();
+        renderTable();
+      });
+    });
+    
+    document.querySelectorAll('.remove-from-team').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        const sportEvent = btn.getAttribute('data-sport');
+        await updateParticipantTeam(id, null, sportEvent === "all" ? null : sportEvent);
+        renderTeamCards();
+        renderTable();
+      });
+    });
+  }
+
   function populateYearFilter() {
     const years = new Set();
     allRegistrations.forEach(reg => {
       if (reg.yearJoined) years.add(reg.yearJoined);
     });
     const sortedYears = Array.from(years).sort((a, b) => b - a);
-    yearJoinedFilter.innerHTML = '<option value="all">All Years</option>';
+    DOM.yearJoinedFilter.innerHTML = '<option value="all">All Years</option>';
     sortedYears.forEach(year => {
-      yearJoinedFilter.innerHTML += `<option value="${year}">${year}</option>`;
+      DOM.yearJoinedFilter.innerHTML += `<option value="${year}">${year}</option>`;
     });
   }
 
   function applyAgeFilter(age, filterValue) {
     if (filterValue === 'all') return true;
-    if (filterValue === 'below30') return age >= 1 && age <= 29;
+    if (filterValue === 'below30') return age >= 16 && age <= 29;
     if (filterValue === 'above30') return age >= 30 && age <= 39;
     if (filterValue === 'above40') return age >= 40 && age <= 60;
     return true;
   }
 
   function getFilteredRegistrations() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const ageVal = ageFilter.value;
-    const membershipVal = membershipFilter.value;
-    const yearVal = yearJoinedFilter.value;
-    const sportVal = sportFilter.value;
+    const searchTerm = DOM.searchInput.value.toLowerCase();
+    const ageVal = DOM.ageFilter.value;
+    const membershipVal = DOM.membershipFilter.value;
+    const yearVal = DOM.yearJoinedFilter.value;
+    const sportVal = DOM.sportFilter.value;
 
-    let filtered = allRegistrations.filter(reg => {
-      const matchesSearch = reg.fullName?.toLowerCase().includes(searchTerm);
-      if (!matchesSearch) return false;
-      const age = reg.age;
-      if (!applyAgeFilter(age, ageVal)) return false;
+    return allRegistrations.filter(reg => {
+      if (!reg.fullName?.toLowerCase().includes(searchTerm)) return false;
+      if (!applyAgeFilter(reg.age, ageVal)) return false;
       if (membershipVal !== 'all' && reg.membershipStatus !== membershipVal) return false;
       if (yearVal !== 'all' && reg.yearJoined !== yearVal) return false;
       if (sportVal && (!reg.sportsParticipating || !reg.sportsParticipating.includes(sportVal))) return false;
       return true;
     });
-    return filtered;
   }
 
   function updateFilterStats(filteredCount) {
     const totalCount = allRegistrations.length;
-    if (filteredCount === totalCount) {
-      filterStatsDiv.innerHTML = `📊 Showing all ${totalCount} registrations`;
-    } else {
-      filterStatsDiv.innerHTML = `📊 Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
-    }
+    DOM.filterStatsDiv.innerHTML = filteredCount === totalCount 
+      ? `📊 Showing all ${totalCount} registrations`
+      : `📊 Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
   }
 
   async function fetchRegistrations() {
@@ -627,6 +960,7 @@
       populateYearFilter();
       renderWidgets();
       renderTable();
+      renderTeamCards();
       renderCharts();
     } catch (err) {
       console.error(err);
@@ -651,7 +985,7 @@
     for (let [sport, count] of Object.entries(sportCounts)) {
       if (count > maxCount) { maxCount = count; mostPopular = sport; }
     }
-    widgetsContainer.innerHTML = `
+    DOM.widgetsContainer.innerHTML = `
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">${total}</div></div>
       <div class="widget-card"><h4>Regular Members</h4><div class="widget-number">${regular}</div></div>
       <div class="widget-card"><h4>Emeritus Members</h4><div class="widget-number">${emeritus}</div></div>
@@ -659,16 +993,34 @@
     `;
   }
 
+  function getTeamBadgeForDisplay(participant) {
+    if (!participant.teamAssignments) return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
+    
+    // Get the primary team (from their first sport)
+    if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
+      for (const sport of participant.sportsParticipating) {
+        const teamId = participant.teamAssignments[sport];
+        if (teamId) {
+          const team = teams.find(t => t.id === teamId);
+          if (team) {
+            return `<span class="team-badge-sm" style="background: ${team.color};">${team.icon} ${team.name}</span>`;
+          }
+        }
+      }
+    }
+    return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
+  }
+
   function renderTable() {
     const filtered = getFilteredRegistrations();
     updateFilterStats(filtered.length);
 
     if (filtered.length === 0) {
-      tableBody.innerHTML = '<tr><td colspan="10" class="empty-state">✨ No registrations match your filters</td></tr>';
+      DOM.tableBody.innerHTML = '<tr><td colspan="10" class="empty-state">✨ No registrations match your filters</td></tr>';
       return;
     }
     
-    tableBody.innerHTML = filtered.map(reg => `
+    DOM.tableBody.innerHTML = filtered.map(reg => `
       <tr>
         <td><strong>${escapeHtml(reg.fullName || '')}</strong></td>
         <td>${reg.age || '—'}</td>
@@ -678,7 +1030,7 @@
         <td>${Array.isArray(reg.sportsParticipating) ? reg.sportsParticipating.join(', ') : '—'}</td>
         <td>${reg.shirtSize || '—'}</td>
         <td>${reg.contactNumber || '—'}</td>
-        <td>${reg.createdAt?.toDate ? reg.createdAt.toDate().toLocaleDateString() : (reg.createdAt || 'N/A')}</td>
+        <td>${getTeamBadgeForDisplay(reg)}</td>
         <td>
           <button class="action-btn view-btn" data-id="${reg.id}">👁️ View</button>
           <button class="action-btn delete-btn" data-id="${reg.id}">🗑️ Delete</button>
@@ -687,10 +1039,7 @@
     `).join('');
 
     document.querySelectorAll('.view-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-id');
-        showDetails(id);
-      });
+      btn.addEventListener('click', () => showDetails(btn.getAttribute('data-id')));
     });
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -707,7 +1056,19 @@
   function showDetails(id) {
     const reg = allRegistrations.find(r => r.id === id);
     if (!reg) return;
-    modalContent.innerHTML = `
+    
+    let teamInfo = '';
+    if (reg.teamAssignments && reg.sportsParticipating) {
+      teamInfo = '<p><strong>Team Assignments by Sport:</strong></p><ul>';
+      reg.sportsParticipating.forEach(sport => {
+        const teamId = reg.teamAssignments[sport];
+        const team = teams.find(t => t.id === teamId);
+        teamInfo += `<li>${sport}: ${team ? `${team.icon} ${team.name}` : 'Not assigned'}</li>`;
+      });
+      teamInfo += '</ul>';
+    }
+    
+    DOM.modalContent.innerHTML = `
       <h3 style="margin-bottom: 1rem;">📄 Participant Details</h3>
       <p><strong>Full Name:</strong> ${escapeHtml(reg.fullName)}</p>
       <p><strong>Age:</strong> ${reg.age}</p>
@@ -721,11 +1082,12 @@
       <p><strong>Sports:</strong> ${reg.sportsParticipating?.join(', ')}</p>
       <p><strong>Medical Condition:</strong> ${reg.medicalCondition || 'None'}</p>
       <p><strong>Waiver Date:</strong> ${reg.waiverDate}</p>
+      ${teamInfo}
       <button class="action-btn" id="closeModalBtn" style="margin-top: 1rem;">Close</button>
     `;
-    modalOverlay.classList.add('active');
+    DOM.modalOverlay.classList.add('active');
     document.getElementById('closeModalBtn')?.addEventListener('click', () => {
-      modalOverlay.classList.remove('active');
+      DOM.modalOverlay.classList.remove('active');
     });
   }
 
@@ -733,7 +1095,7 @@
     if (!allRegistrations.length) return;
     const genderMap = { Male: 0, Female: 0, 'Non-binary': 0, 'Prefer not to say': 0 };
     const sportCount = {};
-    const shirtMap = { XS: 0, S: 0, M: 0, L: 0, XL: 0, XXL: 0 };
+    const shirtMap = { XS: 0, S: 0, M: 0, L: 0, XL: 0, XXL: 0, XXXL: 0 };
     allRegistrations.forEach(r => {
       if (r.gender && genderMap.hasOwnProperty(r.gender)) genderMap[r.gender]++;
       if (r.sportsParticipating) r.sportsParticipating.forEach(s => sportCount[s] = (sportCount[s] || 0) + 1);
@@ -742,38 +1104,46 @@
     if (charts.gender) charts.gender.destroy();
     if (charts.sport) charts.sport.destroy();
     if (charts.shirt) charts.shirt.destroy();
-    const ctxGen = document.getElementById('genderChart').getContext('2d');
-    const ctxSport = document.getElementById('sportChart').getContext('2d');
-    const ctxShirt = document.getElementById('shirtChart').getContext('2d');
-    charts.gender = new Chart(ctxGen, { type: 'doughnut', data: { labels: Object.keys(genderMap), datasets: [{ data: Object.values(genderMap), backgroundColor: ['#2563eb', '#3b82f6', '#93c5fd', '#bfdbfe'] }] } });
-    charts.sport = new Chart(ctxSport, { type: 'bar', data: { labels: Object.keys(sportCount), datasets: [{ label: 'Participants', data: Object.values(sportCount), backgroundColor: '#1e6fdf' }] } });
-    charts.shirt = new Chart(ctxShirt, { type: 'pie', data: { labels: Object.keys(shirtMap), datasets: [{ data: Object.values(shirtMap), backgroundColor: ['#0f3b6f', '#1e6fdf', '#4b8fd8', '#7aade0', '#a6c8f0', '#cde2fe'] }] } });
+    charts.gender = new Chart(document.getElementById('genderChart'), { type: 'doughnut', data: { labels: Object.keys(genderMap), datasets: [{ data: Object.values(genderMap), backgroundColor: ['#2563eb', '#3b82f6', '#93c5fd', '#bfdbfe'] }] } });
+    charts.sport = new Chart(document.getElementById('sportChart'), { type: 'bar', data: { labels: Object.keys(sportCount), datasets: [{ label: 'Participants', data: Object.values(sportCount), backgroundColor: '#1e6fdf' }] } });
+    charts.shirt = new Chart(document.getElementById('shirtChart'), { type: 'pie', data: { labels: Object.keys(shirtMap), datasets: [{ data: Object.values(shirtMap), backgroundColor: ['#0f3b6f', '#1e6fdf', '#4b8fd8', '#7aade0', '#a6c8f0', '#cde2fe', '#f3c6b0'] }] } });
   }
 
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
 
   function clearFilters() {
-    searchInput.value = '';
-    ageFilter.value = 'all';
-    membershipFilter.value = 'all';
-    yearJoinedFilter.value = 'all';
-    sportFilter.value = '';
+    DOM.searchInput.value = '';
+    DOM.ageFilter.value = 'all';
+    DOM.membershipFilter.value = 'all';
+    DOM.yearJoinedFilter.value = 'all';
+    DOM.sportFilter.value = '';
     renderTable();
   }
 
-  exportBtn.addEventListener('click', () => {
+  DOM.exportBtn?.addEventListener('click', () => {
     const filtered = getFilteredRegistrations();
     if (!filtered.length) { showToast('No data to export', true); return; }
-    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Emergency Name","Waiver Date"]];
+    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Emergency Name","Waiver Date","Assigned Team"]];
     filtered.forEach(r => {
-      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate]);
+      let teamName = "Unassigned";
+      if (r.teamAssignments && r.sportsParticipating && r.sportsParticipating.length > 0) {
+        for (const sport of r.sportsParticipating) {
+          const teamId = r.teamAssignments[sport];
+          if (teamId) {
+            const team = teams.find(t => t.id === teamId);
+            teamName = team ? `${team.icon} ${team.name}` : "Unassigned";
+            break;
+          }
+        }
+      }
+      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate, teamName]);
     });
     const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'waraya_registrations_filtered.csv');
+    link.setAttribute('download', 'waraya_registrations_with_teams.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -781,12 +1151,24 @@
     showToast('CSV exported successfully');
   });
 
-  searchInput.addEventListener('input', () => renderTable());
-  ageFilter.addEventListener('change', () => renderTable());
-  membershipFilter.addEventListener('change', () => renderTable());
-  yearJoinedFilter.addEventListener('change', () => renderTable());
-  sportFilter.addEventListener('change', () => renderTable());
-  clearFiltersBtn.addEventListener('click', clearFilters);
+  DOM.searchInput?.addEventListener('input', () => renderTable());
+  DOM.ageFilter?.addEventListener('change', () => renderTable());
+  DOM.membershipFilter?.addEventListener('change', () => renderTable());
+  DOM.yearJoinedFilter?.addEventListener('change', () => renderTable());
+  DOM.sportFilter?.addEventListener('change', () => renderTable());
+  DOM.clearFiltersBtn?.addEventListener('click', clearFilters);
+
+  // Sport tab event listeners
+  if (DOM.sportTabs) {
+    DOM.sportTabs.querySelectorAll('.sport-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        DOM.sportTabs.querySelectorAll('.sport-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentSportFilter = tab.getAttribute('data-sport');
+        renderTeamCards();
+      });
+    });
+  }
 
   const navLinks = document.querySelectorAll('.sidebar nav a');
   navLinks.forEach(link => {
@@ -794,27 +1176,46 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const section = link.getAttribute('data-section');
-        if (section === 'dashboard' || section === 'registrations') {
-          dashboardSection.style.display = 'block';
-          statisticsSection.style.display = 'none';
-        } else if (section === 'statistics') {
-          dashboardSection.style.display = 'none';
-          statisticsSection.style.display = 'block';
-          renderCharts();
-        }
+        DOM.dashboardSection.style.display = section === 'dashboard' ? 'block' : 'none';
+        DOM.teamAssignmentSection.style.display = section === 'teamAssignment' ? 'block' : 'none';
+        DOM.statisticsSection.style.display = section === 'statistics' ? 'block' : 'none';
+        if (section === 'statistics') renderCharts();
+        if (section === 'teamAssignment') renderTeamCards();
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
+        // Close sidebar on mobile after navigation
+        if (window.innerWidth <= 860) {
+          document.getElementById('sidebar').classList.remove('open');
+        }
       });
     }
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
     await signOut(auth);
     window.location.href = 'login.html';
   });
 
-  document.getElementById('hamburgerBtn').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
+  // Mobile sidebar handlers
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  hamburgerBtn?.addEventListener('click', () => {
+    sidebar.classList.add('open');
+  });
+
+  closeSidebarBtn?.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 860) {
+      if (!sidebar.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    }
   });
 
   function updateDateTime() {
@@ -823,21 +1224,17 @@
   setInterval(updateDateTime, 1000);
   updateDateTime();
 
-  // SIMPLIFIED AUTH CHECK - Allow any logged in user to access dashboard
-  // Remove strict role check since it was causing redirect loops
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = 'login.html';
       return;
     }
-    
-    // User is logged in, load the dashboard
-    document.getElementById('roleBadge').innerText = "Staff";
+    document.getElementById('roleBadge').innerText = "Admin";
     await fetchRegistrations();
   });
 
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) modalOverlay.classList.remove('active');
+  DOM.modalOverlay?.addEventListener('click', (e) => {
+    if (e.target === DOM.modalOverlay) DOM.modalOverlay.classList.remove('active');
   });
 </script>
 </body>
