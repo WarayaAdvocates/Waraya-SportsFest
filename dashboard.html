@@ -171,7 +171,7 @@
       color: #0a2540;
     }
 
-    .registrations-panel, .team-assignment-panel {
+    .registrations-panel, .team-assignment-panel, .medical-panel {
       background: white;
       border-radius: 32px;
       padding: 1.5rem;
@@ -316,6 +316,48 @@
     .team-fire-sm { background: #dc2626; color: white; }
     .team-air-sm { background: #eab308; color: #422006; }
     .team-unassigned { background: #9ca3af; color: white; }
+
+    /* Medical Condition Badge */
+    .medical-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .medical-card {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #ef4444;
+      transition: transform 0.2s;
+    }
+
+    .medical-card:hover {
+      transform: translateX(5px);
+      background: #fff;
+    }
+
+    .medical-card h4 {
+      font-size: 1rem;
+      color: #0a2540;
+      margin-bottom: 0.5rem;
+    }
+
+    .medical-card p {
+      font-size: 0.85rem;
+      color: #4a627a;
+      margin: 0.25rem 0;
+    }
+
+    .medical-condition-text {
+      font-weight: 600;
+      color: #b91c1c;
+    }
 
     .sport-tabs {
       display: flex;
@@ -525,7 +567,6 @@
       display: inline-block;
     }
 
-    /* Close sidebar button for mobile */
     .close-sidebar {
       display: none;
       position: absolute;
@@ -556,6 +597,7 @@
   <nav>
     <a href="#" data-section="dashboard" class="active">📊 Dashboard</a>
     <a href="#" data-section="teamAssignment">🏆 Team Assignment</a>
+    <a href="#" data-section="medicalConditions">🩺 Medical Conditions</a>
     <a href="#" data-section="statistics">📈 Statistics</a>
     <a href="#" id="logoutBtn">🚪 Logout</a>
   </nav>
@@ -651,7 +693,6 @@
       <h3 style="margin-bottom: 0.5rem;">🏆 Team Assignment Per Sport</h3>
       <p style="margin-bottom: 1rem; color: #4a627a;">Assign participants to the four nations based on the Avatar: The Last Airbender theme. Select a sport below to view and assign players for that specific event.</p>
       
-      <!-- Sport Tabs -->
       <div class="sport-tabs" id="sportTabs">
         <button class="sport-tab active" data-sport="all">🏆 All Participants</button>
         <button class="sport-tab" data-sport="Pickleball">🏓 Pickleball</button>
@@ -661,8 +702,42 @@
         <button class="sport-tab" data-sport="Scrabble">🔤 Scrabble</button>
       </div>
       
-      <div class="team-cards" id="teamCardsContainer">
-        <!-- Team cards will be dynamically populated -->
+      <div class="team-cards" id="teamCardsContainer"></div>
+    </div>
+  </div>
+
+  <!-- MEDICAL CONDITIONS SECTION -->
+  <div id="medicalConditionsSection" style="display: none;">
+    <div class="medical-panel">
+      <h3 style="margin-bottom: 0.5rem;">🩺 Participants with Medical Conditions</h3>
+      <p style="margin-bottom: 1rem; color: #4a627a;">List of all registrants who have declared medical conditions. Please ensure proper accommodations are made for their safety during the sportsfest.</p>
+      
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label>🔍 Search Name</label>
+          <input type="text" id="medicalSearchInput" placeholder="Search by name...">
+        </div>
+        <div class="filter-group">
+          <label>🎯 Filter by Sport</label>
+          <select id="medicalSportFilter">
+            <option value="all">All Sports</option>
+            <option value="Pickleball">Pickleball</option>
+            <option value="Volleyball">Volleyball</option>
+            <option value="Mobile Legends">Mobile Legends</option>
+            <option value="Chess">Chess</option>
+            <option value="Scrabble">Scrabble</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button id="clearMedicalFiltersBtn" class="clear-filters-btn">🗑️ Clear Filters</button>
+          <button id="exportMedicalCsvBtn" class="export-btn">📎 Export Medical List</button>
+        </div>
+      </div>
+      
+      <div id="medicalStats" class="filter-stats"></div>
+      
+      <div id="medicalListContainer" style="margin-top: 1.5rem;">
+        <!-- Medical conditions list will be populated here -->
       </div>
     </div>
   </div>
@@ -714,6 +789,7 @@
   const DOM = {
     dashboardSection: document.getElementById('dashboardSection'),
     teamAssignmentSection: document.getElementById('teamAssignmentSection'),
+    medicalConditionsSection: document.getElementById('medicalConditionsSection'),
     statisticsSection: document.getElementById('statisticsSection'),
     tableBody: document.getElementById('tableBody'),
     widgetsContainer: document.getElementById('widgetsContainer'),
@@ -728,7 +804,13 @@
     modalOverlay: document.getElementById('detailModal'),
     modalContent: document.getElementById('modalContent'),
     teamCardsContainer: document.getElementById('teamCardsContainer'),
-    sportTabs: document.getElementById('sportTabs')
+    sportTabs: document.getElementById('sportTabs'),
+    medicalSearchInput: document.getElementById('medicalSearchInput'),
+    medicalSportFilter: document.getElementById('medicalSportFilter'),
+    clearMedicalFiltersBtn: document.getElementById('clearMedicalFiltersBtn'),
+    exportMedicalCsvBtn: document.getElementById('exportMedicalCsvBtn'),
+    medicalListContainer: document.getElementById('medicalListContainer'),
+    medicalStats: document.getElementById('medicalStats')
   };
 
   function showToast(message, isError = false) {
@@ -740,6 +822,54 @@
     setTimeout(() => toast.remove(), 3000);
   }
 
+  // Function to get participants with medical conditions
+  function getParticipantsWithMedicalConditions() {
+    return allRegistrations.filter(p => p.medicalCondition && p.medicalCondition !== 'None');
+  }
+
+  // Render Medical Conditions List
+  function renderMedicalConditions() {
+    let participants = getParticipantsWithMedicalConditions();
+    
+    const searchTerm = DOM.medicalSearchInput?.value.toLowerCase() || '';
+    const sportFilterVal = DOM.medicalSportFilter?.value || 'all';
+    
+    if (searchTerm) {
+      participants = participants.filter(p => p.fullName?.toLowerCase().includes(searchTerm));
+    }
+    if (sportFilterVal !== 'all') {
+      participants = participants.filter(p => p.sportsParticipating && p.sportsParticipating.includes(sportFilterVal));
+    }
+    
+    DOM.medicalStats.innerHTML = `📊 Showing ${participants.length} participant(s) with medical conditions`;
+    
+    if (participants.length === 0) {
+      DOM.medicalListContainer.innerHTML = '<div class="empty-state">✨ No participants with medical conditions found</div>';
+      return;
+    }
+    
+    let html = '<div style="display: flex; flex-direction: column; gap: 1rem;">';
+    participants.forEach(p => {
+      html += `
+        <div class="medical-card">
+          <h4>${escapeHtml(p.fullName)}</h4>
+          <p><strong>Age:</strong> ${p.age} | <strong>Gender:</strong> ${p.gender} | <strong>Membership:</strong> ${p.membershipStatus}</p>
+          <p><strong>🩺 Medical Condition:</strong> <span class="medical-condition-text">${escapeHtml(p.medicalCondition)}</span></p>
+          <p><strong>🎯 Registered Sports:</strong> ${p.sportsParticipating?.join(', ') || 'None'}</p>
+          <p><strong>📞 Contact:</strong> ${p.contactNumber || 'N/A'}</p>
+          <button class="action-btn view-btn" data-id="${p.id}" style="margin-top: 0.5rem;">👁️ View Full Details</button>
+        </div>
+      `;
+    });
+    html += '</div>';
+    
+    DOM.medicalListContainer.innerHTML = html;
+    
+    document.querySelectorAll('#medicalListContainer .view-btn').forEach(btn => {
+      btn.addEventListener('click', () => showDetails(btn.getAttribute('data-id')));
+    });
+  }
+
   async function updateParticipantTeam(participantId, teamId, sportEvent = null) {
     try {
       const participant = allRegistrations.find(r => r.id === participantId);
@@ -748,14 +878,11 @@
       let currentAssignments = participant.teamAssignments || {};
       
       if (sportEvent && sportEvent !== "all") {
-        // Assign for specific sport
         currentAssignments[sportEvent] = teamId;
       } else {
-        // Assign for all sports or clear
         if (teamId === null) {
           currentAssignments = {};
         } else {
-          // Assign to all sports the participant is registered for
           if (participant.sportsParticipating) {
             participant.sportsParticipating.forEach(sport => {
               currentAssignments[sport] = teamId;
@@ -766,7 +893,6 @@
       
       await updateDoc(doc(db, "sportsfest_registrations", participantId), { teamAssignments: currentAssignments });
       
-      // Update local data
       const index = allRegistrations.findIndex(r => r.id === participantId);
       if (index !== -1) {
         allRegistrations[index].teamAssignments = currentAssignments;
@@ -774,6 +900,7 @@
       
       renderTable();
       renderTeamCards();
+      renderMedicalConditions();
       showToast(`Team assignment updated successfully`);
     } catch (error) {
       console.error("Error updating team:", error);
@@ -784,7 +911,6 @@
   function getParticipantTeamForSport(participant, sportEvent) {
     if (!participant.teamAssignments) return null;
     if (sportEvent === "all") {
-      // Return any assigned team (prefer the one from their first sport)
       if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
         for (const sport of participant.sportsParticipating) {
           if (participant.teamAssignments[sport]) return participant.teamAssignments[sport];
@@ -798,7 +924,6 @@
   function renderTeamCards() {
     const sportFilter = currentSportFilter;
     
-    // Get participants who are registered for this sport (or all participants)
     let participantsToShow = allRegistrations;
     if (sportFilter !== "all") {
       participantsToShow = allRegistrations.filter(p => 
@@ -806,14 +931,7 @@
       );
     }
     
-    // Group participants by team for this specific sport
-    const teamMembers = {
-      water: [],
-      earth: [],
-      fire: [],
-      air: [],
-      unassigned: []
-    };
+    const teamMembers = { water: [], earth: [], fire: [], air: [], unassigned: [] };
     
     participantsToShow.forEach(p => {
       const assignedTeam = getParticipantTeamForSport(p, sportFilter);
@@ -844,7 +962,6 @@
       `;
     });
     
-    // Add unassigned section
     const unassigned = teamMembers.unassigned || [];
     html += `
       <div class="team-card" style="border-left-color: #9ca3af;">
@@ -865,26 +982,6 @@
     `;
     
     DOM.teamCardsContainer.innerHTML = html;
-    
-    // Add event listeners
-    document.querySelectorAll('.assign-team-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const teamId = btn.getAttribute('data-team');
-        const sportEvent = btn.getAttribute('data-sport');
-        const unassignedList = allRegistrations.filter(p => !getParticipantTeamForSport(p, sportEvent));
-        
-        if (unassignedList.length === 0) {
-          showToast("No unassigned participants to add", true);
-          return;
-        }
-        
-        for (const p of unassignedList.slice(0, 5)) {
-          await updateParticipantTeam(p.id, teamId, sportEvent === "all" ? null : sportEvent);
-        }
-        renderTeamCards();
-        renderTable();
-      });
-    });
     
     document.querySelectorAll('.assign-quick').forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -961,6 +1058,7 @@
       renderWidgets();
       renderTable();
       renderTeamCards();
+      renderMedicalConditions();
       renderCharts();
     } catch (err) {
       console.error(err);
@@ -995,8 +1093,6 @@
 
   function getTeamBadgeForDisplay(participant) {
     if (!participant.teamAssignments) return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
-    
-    // Get the primary team (from their first sport)
     if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
       for (const sport of participant.sportsParticipating) {
         const teamId = participant.teamAssignments[sport];
@@ -1080,7 +1176,7 @@
       <p><strong>Emergency Contact:</strong> ${reg.emergencyContactName} (${reg.emergencyRelationship}) - ${reg.emergencyContactNumber}</p>
       <p><strong>Shirt Size:</strong> ${reg.shirtSize}</p>
       <p><strong>Sports:</strong> ${reg.sportsParticipating?.join(', ')}</p>
-      <p><strong>Medical Condition:</strong> ${reg.medicalCondition || 'None'}</p>
+      <p><strong>Medical Condition:</strong> <span style="color: #b91c1c; font-weight: 600;">${reg.medicalCondition || 'None'}</span></p>
       <p><strong>Waiver Date:</strong> ${reg.waiverDate}</p>
       ${teamInfo}
       <button class="action-btn" id="closeModalBtn" style="margin-top: 1rem;">Close</button>
@@ -1119,11 +1215,17 @@
     DOM.sportFilter.value = '';
     renderTable();
   }
+  
+  function clearMedicalFilters() {
+    if (DOM.medicalSearchInput) DOM.medicalSearchInput.value = '';
+    if (DOM.medicalSportFilter) DOM.medicalSportFilter.value = 'all';
+    renderMedicalConditions();
+  }
 
   DOM.exportBtn?.addEventListener('click', () => {
     const filtered = getFilteredRegistrations();
     if (!filtered.length) { showToast('No data to export', true); return; }
-    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Emergency Name","Waiver Date","Assigned Team"]];
+    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Emergency Name","Waiver Date","Assigned Team","Medical Condition"]];
     filtered.forEach(r => {
       let teamName = "Unassigned";
       if (r.teamAssignments && r.sportsParticipating && r.sportsParticipating.length > 0) {
@@ -1136,19 +1238,39 @@
           }
         }
       }
-      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate, teamName]);
+      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate, teamName, r.medicalCondition || 'None']);
     });
     const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'waraya_registrations_with_teams.csv');
+    link.setAttribute('download', 'waraya_registrations_full.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
     showToast('CSV exported successfully');
+  });
+  
+  DOM.exportMedicalCsvBtn?.addEventListener('click', () => {
+    const medicalParticipants = getParticipantsWithMedicalConditions();
+    if (!medicalParticipants.length) { showToast('No medical data to export', true); return; }
+    let csvRows = [["Full Name","Age","Gender","Medical Condition","Sports","Contact Number","Emergency Contact"]];
+    medicalParticipants.forEach(r => {
+      csvRows.push([r.fullName, r.age, r.gender, r.medicalCondition, (r.sportsParticipating||[]).join(";"), r.contactNumber, r.emergencyContactName]);
+    });
+    const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.setAttribute('download', 'waraya_medical_conditions.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast('Medical list exported successfully');
   });
 
   DOM.searchInput?.addEventListener('input', () => renderTable());
@@ -1157,8 +1279,10 @@
   DOM.yearJoinedFilter?.addEventListener('change', () => renderTable());
   DOM.sportFilter?.addEventListener('change', () => renderTable());
   DOM.clearFiltersBtn?.addEventListener('click', clearFilters);
+  DOM.clearMedicalFiltersBtn?.addEventListener('click', clearMedicalFilters);
+  DOM.medicalSearchInput?.addEventListener('input', () => renderMedicalConditions());
+  DOM.medicalSportFilter?.addEventListener('change', () => renderMedicalConditions());
 
-  // Sport tab event listeners
   if (DOM.sportTabs) {
     DOM.sportTabs.querySelectorAll('.sport-tab').forEach(tab => {
       tab.addEventListener('click', () => {
@@ -1178,12 +1302,13 @@
         const section = link.getAttribute('data-section');
         DOM.dashboardSection.style.display = section === 'dashboard' ? 'block' : 'none';
         DOM.teamAssignmentSection.style.display = section === 'teamAssignment' ? 'block' : 'none';
+        DOM.medicalConditionsSection.style.display = section === 'medicalConditions' ? 'block' : 'none';
         DOM.statisticsSection.style.display = section === 'statistics' ? 'block' : 'none';
         if (section === 'statistics') renderCharts();
         if (section === 'teamAssignment') renderTeamCards();
+        if (section === 'medicalConditions') renderMedicalConditions();
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-        // Close sidebar on mobile after navigation
         if (window.innerWidth <= 860) {
           document.getElementById('sidebar').classList.remove('open');
         }
@@ -1196,7 +1321,6 @@
     window.location.href = 'login.html';
   });
 
-  // Mobile sidebar handlers
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const closeSidebarBtn = document.getElementById('closeSidebarBtn');
   const sidebar = document.getElementById('sidebar');
@@ -1209,7 +1333,6 @@
     sidebar.classList.remove('open');
   });
 
-  // Close sidebar when clicking outside on mobile
   document.addEventListener('click', (e) => {
     if (window.innerWidth <= 860) {
       if (!sidebar.contains(e.target) && !hamburgerBtn.contains(e.target)) {
