@@ -35,31 +35,11 @@
       overflow-y: auto;
     }
 
-    .sidebar.open {
-      transform: translateX(0);
-    }
-
-    .sidebar .logo-area {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .sidebar .logo-area img {
-      width: 70px;
-      margin-bottom: 0.5rem;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-    }
-
-    .sidebar .logo-area h3 {
-      font-weight: 700;
-      font-size: 1.2rem;
-      letter-spacing: -0.3px;
-    }
-
-    .sidebar nav {
-      margin-top: 1rem;
-    }
-
+    .sidebar.open { transform: translateX(0); }
+    .sidebar .logo-area { text-align: center; margin-bottom: 2rem; }
+    .sidebar .logo-area img { width: 70px; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+    .sidebar .logo-area h3 { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.3px; }
+    .sidebar nav { margin-top: 1rem; }
     .sidebar nav a {
       display: flex;
       align-items: center;
@@ -72,7 +52,6 @@
       font-weight: 500;
       transition: all 0.2s;
     }
-
     .sidebar nav a:hover, .sidebar nav a.active {
       background: rgba(30, 111, 223, 0.85);
       color: white;
@@ -101,77 +80,31 @@
       border: 1px solid rgba(255,255,255,0.6);
     }
 
-    .hamburger {
-      display: none;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #1e3a8a;
-      font-weight: bold;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .role-badge {
-      background: linear-gradient(95deg, #1e6fdf, #0b4a9f);
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: 0.5px;
-    }
-
-    .datetime {
-      font-weight: 500;
-      color: #2c5282;
-      background: #eef2ff;
-      padding: 5px 14px;
-      border-radius: 40px;
-      font-size: 0.8rem;
-    }
+    .hamburger { display: none; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: #1e3a8a; font-weight: bold; }
+    .user-info { display: flex; align-items: center; gap: 1rem; }
+    .role-badge { background: linear-gradient(95deg, #1e6fdf, #0b4a9f); padding: 6px 16px; border-radius: 40px; font-size: 0.75rem; font-weight: 700; color: white; letter-spacing: 0.5px; }
+    .datetime { font-weight: 500; color: #2c5282; background: #eef2ff; padding: 5px 14px; border-radius: 40px; font-size: 0.8rem; }
 
     .widgets-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
     .widget-card {
       background: white;
-      padding: 1.5rem;
-      border-radius: 32px;
+      padding: 1.2rem;
+      border-radius: 24px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
       transition: all 0.25s;
       border: 1px solid rgba(0,0,0,0.02);
     }
+    .widget-card:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12); }
+    .widget-card h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #4b6a88; margin-bottom: 0.5rem; }
+    .widget-number { font-size: 2rem; font-weight: 800; color: #0a2540; }
 
-    .widget-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
-    }
-
-    .widget-card h4 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #4b6a88;
-      margin-bottom: 0.5rem;
-    }
-
-    .widget-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #0a2540;
-    }
-
-    .registrations-panel, .team-assignment-panel, .medical-panel {
+    .panel {
       background: white;
       border-radius: 32px;
       padding: 1.5rem;
@@ -187,146 +120,63 @@
       align-items: center;
     }
 
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 140px;
-    }
-
-    .filter-group label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #4b6a88;
-      letter-spacing: 0.5px;
-    }
-
+    .filter-group { display: flex; flex-direction: column; gap: 4px; min-width: 130px; }
+    .filter-group label { font-size: 0.65rem; font-weight: 600; color: #4b6a88; letter-spacing: 0.5px; }
     .filter-bar input, .filter-bar select {
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 40px;
       border: 1px solid #cbd5e1;
       background: white;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       outline: none;
       width: 100%;
     }
-
-    .filter-bar input:focus, .filter-bar select:focus {
-      border-color: #1e6fdf;
-      box-shadow: 0 0 0 3px rgba(30,111,223,0.1);
-    }
-
-    .filter-actions {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
-
+    .filter-bar input:focus, .filter-bar select:focus { border-color: #1e6fdf; box-shadow: 0 0 0 3px rgba(30,111,223,0.1); }
+    .filter-actions { display: flex; gap: 8px; align-items: flex-end; }
     .filter-bar button {
       background: #1e6fdf;
       border: none;
-      padding: 10px 20px;
+      padding: 8px 16px;
       border-radius: 40px;
       color: white;
       font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
     }
+    .filter-bar button:hover { background: #0b4a9f; transform: translateY(-1px); }
+    .clear-filters-btn { background: #6c8db0; }
+    .clear-filters-btn:hover { background: #4a627a; }
+    .export-btn { background: #0f3b6f; }
 
-    .filter-bar button:hover {
-      background: #0b4a9f;
-      transform: translateY(-1px);
-    }
-
-    .clear-filters-btn {
-      background: #6c8db0;
-    }
-
-    .clear-filters-btn:hover {
-      background: #4a627a;
-    }
-
-    .export-btn {
-      background: #0f3b6f;
-    }
-
-    .table-wrapper {
-      overflow-x: auto;
-      border-radius: 28px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 14px 10px;
-      text-align: left;
-      border-bottom: 1px solid #e9eef3;
-      font-size: 0.85rem;
-    }
-
-    th {
-      background: #f8fafd;
-      font-weight: 700;
-      color: #1a4972;
-    }
+    .table-wrapper { overflow-x: auto; border-radius: 28px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #e9eef3; font-size: 0.8rem; }
+    th { background: #f8fafd; font-weight: 700; color: #1a4972; }
 
     .action-btn {
       background: #eef2ff;
       border: none;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 30px;
       margin: 0 4px;
       cursor: pointer;
       font-weight: 500;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       transition: 0.2s;
     }
+    .delete-btn { background: #fee2e2; color: #b91c1c; }
+    .delete-btn:hover { background: #fecaca; }
+    .view-btn { background: #e0f0ff; color: #1e6fdf; }
+    .view-btn:hover { background: #d0e6ff; }
+    .edit-btn { background: #fef3c7; color: #92400e; }
+    .edit-btn:hover { background: #fde68a; }
 
-    .delete-btn {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-
-    .delete-btn:hover {
-      background: #fecaca;
-    }
-
-    .view-btn {
-      background: #e0f0ff;
-      color: #1e6fdf;
-    }
-
-    .view-btn:hover {
-      background: #d0e6ff;
-    }
-
-    .team-badge-sm {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
+    .team-badge-sm { display: inline-block; padding: 3px 8px; border-radius: 20px; font-size: 0.65rem; font-weight: 600; }
     .team-water-sm { background: #2563eb; color: white; }
     .team-earth-sm { background: #16a34a; color: white; }
     .team-fire-sm { background: #dc2626; color: white; }
     .team-air-sm { background: #eab308; color: #422006; }
     .team-unassigned { background: #9ca3af; color: white; }
-
-    /* Medical Condition Badge */
-    .medical-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      background: #fee2e2;
-      color: #b91c1c;
-    }
 
     .medical-card {
       background: #f8fafc;
@@ -336,28 +186,10 @@
       border-left: 4px solid #ef4444;
       transition: transform 0.2s;
     }
-
-    .medical-card:hover {
-      transform: translateX(5px);
-      background: #fff;
-    }
-
-    .medical-card h4 {
-      font-size: 1rem;
-      color: #0a2540;
-      margin-bottom: 0.5rem;
-    }
-
-    .medical-card p {
-      font-size: 0.85rem;
-      color: #4a627a;
-      margin: 0.25rem 0;
-    }
-
-    .medical-condition-text {
-      font-weight: 600;
-      color: #b91c1c;
-    }
+    .medical-card:hover { transform: translateX(5px); background: #fff; }
+    .medical-card h4 { font-size: 1rem; color: #0a2540; margin-bottom: 0.5rem; }
+    .medical-card p { font-size: 0.85rem; color: #4a627a; margin: 0.25rem 0; }
+    .medical-condition-text { font-weight: 600; color: #b91c1c; }
 
     .sport-tabs {
       display: flex;
@@ -367,30 +199,23 @@
       border-bottom: 1px solid #e2e8f0;
       padding-bottom: 0.5rem;
     }
-
     .sport-tab {
       background: #f1f5f9;
       border: none;
-      padding: 8px 20px;
+      padding: 6px 16px;
       border-radius: 40px;
       cursor: pointer;
       font-weight: 500;
-      transition: all 0.2s;
+      font-size: 0.8rem;
       color: #4a627a;
+      transition: all 0.2s;
     }
-
-    .sport-tab.active {
-      background: #1e6fdf;
-      color: white;
-    }
-
-    .sport-tab:hover {
-      background: #cbd5e1;
-    }
+    .sport-tab.active { background: #1e6fdf; color: white; }
+    .sport-tab:hover { background: #cbd5e1; }
 
     .team-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
     }
@@ -398,71 +223,32 @@
     .team-card {
       background: #f8fafc;
       border-radius: 24px;
-      padding: 1.2rem;
+      padding: 1rem;
       border-left: 6px solid;
       transition: transform 0.2s;
     }
-
-    .team-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .team-card h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .team-card .member-count {
-      font-size: 0.7rem;
-      color: #4a627a;
-      margin-bottom: 0.8rem;
-    }
-
-    .team-card ul {
-      list-style: none;
-      max-height: 250px;
-      overflow-y: auto;
-    }
-
-    .team-card li {
-      padding: 6px 0;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .remove-from-team {
-      background: none;
-      border: none;
-      color: #ef4444;
-      cursor: pointer;
-      font-size: 0.7rem;
-      padding: 2px 6px;
-      border-radius: 20px;
-    }
-
-    .remove-from-team:hover {
-      background: #fee2e2;
-    }
+    .team-card:hover { transform: translateY(-3px); }
+    .team-card h4 { font-size: 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+    .team-card .member-count { font-size: 0.65rem; color: #4a627a; margin-bottom: 0.8rem; }
+    .team-card ul { list-style: none; max-height: 200px; overflow-y: auto; }
+    .team-card li { padding: 5px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; }
+    .remove-from-team { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.65rem; padding: 2px 6px; border-radius: 20px; }
+    .remove-from-team:hover { background: #fee2e2; }
 
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.8rem;
+      gap: 1.5rem;
       margin-top: 1rem;
     }
 
     .chart-card {
       background: white;
-      border-radius: 32px;
-      padding: 1.2rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+      border-radius: 24px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
+    .chart-card h4 { font-size: 0.9rem; margin-bottom: 1rem; color: #0a2540; }
 
     .modal-overlay {
       position: fixed;
@@ -477,25 +263,39 @@
       opacity: 0;
       transition: 0.2s;
     }
-
-    .modal-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
+    .modal-overlay.active { visibility: visible; opacity: 1; }
 
     .modal-container {
       background: white;
-      max-width: 550px;
+      max-width: 650px;
       width: 90%;
       border-radius: 48px;
       padding: 2rem;
+      max-height: 90vh;
+      overflow-y: auto;
       animation: modalPop 0.2s;
     }
+    @keyframes modalPop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    @keyframes modalPop {
-      from { transform: scale(0.96); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .modal-container h3 { margin-bottom: 1.2rem; color: #0a2540; font-size: 1.3rem; }
+    .modal-container label { font-weight: 600; display: block; margin: 0.8rem 0 0.3rem; font-size: 0.85rem; color: #1f3b4c; }
+    .modal-container input, .modal-container select, .modal-container textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 40px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.85rem;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
     }
+    .modal-container textarea { border-radius: 20px; resize: vertical; min-height: 80px; }
+    .modal-container input:focus, .modal-container select:focus, .modal-container textarea:focus {
+      border-color: #1e6fdf;
+      box-shadow: 0 0 0 3px rgba(30,111,223,0.1);
+    }
+    .modal-container .btn-row { display: flex; gap: 10px; margin-top: 1.5rem; justify-content: flex-end; }
+    .modal-container .btn-row button { padding: 10px 24px; border-radius: 40px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .modal-container .btn-row button:hover { transform: translateY(-2px); }
 
     .toast-notify {
       position: fixed;
@@ -504,86 +304,58 @@
       z-index: 1200;
       background: #1f2937;
       color: white;
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 60px;
       font-weight: 500;
+      font-size: 0.8rem;
       animation: fadeSlide 0.3s;
     }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateX(40px);}
-      to { opacity: 1; transform: translateX(0);}
-    }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
 
     @media (max-width: 860px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-      .main-content {
-        margin-left: 0;
-        width: 100%;
-        padding: 1rem;
-      }
-      .hamburger {
-        display: block;
-      }
-      .widgets-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .team-cards {
-        grid-template-columns: 1fr;
-      }
-      .sport-tabs {
-        justify-content: center;
-      }
+      .sidebar { transform: translateX(-100%); }
+      .main-content { margin-left: 0; width: 100%; padding: 1rem; }
+      .hamburger { display: block; }
+      .widgets-grid { grid-template-columns: 1fr 1fr; }
+      .team-cards { grid-template-columns: 1fr; }
+      .sport-tabs { justify-content: center; }
     }
+    @media (max-width: 680px) { .widgets-grid { grid-template-columns: 1fr; } .filter-bar { flex-direction: column; align-items: stretch; } .filter-actions { flex-direction: column; } }
 
-    @media (max-width: 680px) {
-      .widgets-grid {
-        grid-template-columns: 1fr;
-      }
-      .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .filter-actions {
-        flex-direction: column;
-      }
-    }
+    .empty-state { text-align: center; padding: 2rem; color: #6c8db0; }
+    .filter-stats { font-size: 0.7rem; color: #1e6fdf; margin-top: 8px; padding: 4px 12px; background: #eef3ff; border-radius: 20px; display: inline-block; }
 
-    .empty-state {
-      text-align: center;
-      padding: 3rem;
-      color: #6c8db0;
-    }
+    .close-sidebar { display: none; position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    @media (max-width: 860px) { .close-sidebar { display: block; } }
 
-    .filter-stats {
-      font-size: 0.75rem;
-      color: #1e6fdf;
-      margin-top: 8px;
-      padding: 4px 12px;
-      background: #eef3ff;
+    .result-item {
+      background: #f8fafc;
       border-radius: 20px;
-      display: inline-block;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid #1e6fdf;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
+    .result-item:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .result-item .result-info { display: flex; flex-direction: column; gap: 2px; }
+    .result-item .result-sport { font-weight: 700; color: #0a2540; font-size: 0.95rem; }
+    .result-item .result-details { font-size: 0.8rem; color: #4a627a; }
+    .result-item .result-actions { display: flex; gap: 6px; }
+    .result-item .result-actions button { padding: 4px 12px; border-radius: 30px; border: none; font-size: 0.65rem; font-weight: 500; cursor: pointer; transition: 0.2s; }
+    .result-item .result-actions .edit-result-btn { background: #fef3c7; color: #92400e; }
+    .result-item .result-actions .edit-result-btn:hover { background: #fde68a; }
+    .result-item .result-actions .delete-result-btn { background: #fee2e2; color: #b91c1c; }
+    .result-item .result-actions .delete-result-btn:hover { background: #fecaca; }
+    .result-item .result-team { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+    .result-item .result-score { background: #eef3ff; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; color: #1e6fdf; font-weight: 600; }
 
-    .close-sidebar {
-      display: none;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 860px) {
-      .close-sidebar {
-        display: block;
-      }
-    }
+    .vs-text { font-weight: 700; color: #1e6fdf; margin: 0 6px; }
+    .player-names { font-size: 0.75rem; color: #4a627a; display: block; margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -596,9 +368,10 @@
   </div>
   <nav>
     <a href="#" data-section="dashboard" class="active">📊 Dashboard</a>
-    <a href="#" data-section="teamAssignment">🏆 Team Assignment</a>
-    <a href="#" data-section="medicalConditions">🩺 Medical Conditions</a>
-    <a href="#" data-section="statistics">📈 Statistics</a>
+    <a href="#" data-section="results">🏅 Results</a>
+    <a href="#" data-section="teamAssignment">🏆 Teams</a>
+    <a href="#" data-section="medicalConditions">🩺 Medical</a>
+    <a href="#" data-section="statistics">📈 Stats</a>
     <a href="#" id="logoutBtn">🚪 Logout</a>
   </nav>
 </div>
@@ -607,7 +380,7 @@
   <div class="top-bar">
     <button class="hamburger" id="hamburgerBtn">☰</button>
     <div class="user-info">
-      <span class="role-badge" id="roleBadge">Officer</span>
+      <span class="role-badge" id="roleBadge">Admin</span>
       <span class="datetime" id="datetime"></span>
     </div>
   </div>
@@ -616,88 +389,61 @@
   <div id="dashboardSection">
     <div class="widgets-grid" id="widgetsContainer">
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>Regular Members</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>Emeritus Members</h4><div class="widget-number">—</div></div>
-      <div class="widget-card"><h4>🔥 Most Popular Sport</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4>✅ Confirmed</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4>⏳ Pending</h4><div class="widget-number">—</div></div>
+      <div class="widget-card"><h4>🏅 Results Posted</h4><div class="widget-number">—</div></div>
     </div>
-    <div class="registrations-panel">
+    <div class="panel">
       <h3 style="margin-bottom: 1rem;">📌 Registrations Management</h3>
       
       <div class="filter-bar">
-        <div class="filter-group">
-          <label>🔍 Search Name</label>
-          <input type="text" id="searchNameInput" placeholder="Full name...">
-        </div>
-        
-        <div class="filter-group">
-          <label>🏆 Age Range</label>
-          <select id="ageFilterSelect">
-            <option value="all">All Ages</option>
-            <option value="below30">Below 30 (16-29)</option>
-            <option value="above30">Above 30 (30-39)</option>
-            <option value="above40">Above 40 (40-60)</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <label>⭐ Membership Status</label>
-          <select id="membershipFilterSelect">
-            <option value="all">All Members</option>
-            <option value="Regular">Regular</option>
-            <option value="Emeritus">Emeritus</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <label>📅 Year Joined</label>
-          <select id="yearJoinedFilterSelect">
-            <option value="all">All Years</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <label>🎯 Sport</label>
-          <select id="sportFilterSelect">
-            <option value="">All Sports</option>
-            <option value="Pickleball">Pickleball</option>
-            <option value="Volleyball">Volleyball</option>
-            <option value="Mobile Legends">Mobile Legends</option>
-            <option value="Chess">Chess</option>
-            <option value="Scrabble">Scrabble</option>
-          </select>
-        </div>
-        
-        <div class="filter-actions">
-          <button id="clearFiltersBtn" class="clear-filters-btn">🗑️ Clear Filters</button>
-          <button id="exportCsvBtn" class="export-btn">📎 Export CSV</button>
-        </div>
+        <div class="filter-group"><label>🔍 Search Name</label><input type="text" id="searchNameInput" placeholder="Full name..."></div>
+        <div class="filter-group"><label>🏆 Age Range</label><select id="ageFilterSelect"><option value="all">All Ages</option><option value="below30">Below 30 (16-29)</option><option value="above30">Above 30 (30-39)</option><option value="above40">Above 40 (40-60)</option></select></div>
+        <div class="filter-group"><label>⭐ Membership</label><select id="membershipFilterSelect"><option value="all">All</option><option value="Regular">Regular</option><option value="Emeritus">Emeritus</option></select></div>
+        <div class="filter-group"><label>📅 Year Joined</label><select id="yearJoinedFilterSelect"><option value="all">All Years</option></select></div>
+        <div class="filter-group"><label>🎯 Sport</label><select id="sportFilterSelect"><option value="">All</option><option>Pickleball</option><option>Volleyball</option><option>Mobile Legends</option><option>Chess</option><option>Scrabble</option></select></div>
+        <div class="filter-group"><label>✅ Status</label><select id="statusFilterSelect"><option value="all">All</option><option value="confirmed">Confirmed</option><option value="pending">Pending</option></select></div>
+        <div class="filter-actions"><button id="clearFiltersBtn" class="clear-filters-btn">🗑️ Clear</button><button id="exportCsvBtn" class="export-btn">📎 Export CSV</button></div>
       </div>
       
       <div id="filterStats" class="filter-stats"></div>
       
       <div class="table-wrapper">
         <table id="registrationsTable">
-          <thead>
-            <tr><th>Full Name</th><th>Age</th><th>Year Joined</th><th>Membership</th><th>Gender</th><th>Sports</th><th>Shirt</th><th>Contact</th><th>Team</th><th>Actions</th></tr>
-          </thead>
-          <tbody id="tableBody"><tr><td colspan="10" class="empty-state">Loading registrations......</td></tr>
-          </tbody>
+          <thead><tr><th>Full Name</th><th>Age</th><th>Year</th><th>Membership</th><th>Gender</th><th>Sports</th><th>Shirt</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="tableBody"><tr><td colspan="9" class="empty-state">Loading registrations...</td></tr></tbody>
         </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SECTION -->
+  <div id="resultsSection" style="display: none;">
+    <div class="panel">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <h3>🏅 Sports Results</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button id="addResultBtn" class="action-btn" style="background: #1e6fdf; color: white; padding: 8px 20px;">+ Add Result</button>
+          <button id="viewResultsBtn" class="action-btn" style="background: #059669; color: white; padding: 8px 20px;">👁️ View Results Page</button>
+        </div>
+      </div>
+      <div id="resultsListContainer">
+        <div class="empty-state">No results posted yet. Click "Add Result" to create one.</div>
       </div>
     </div>
   </div>
 
   <!-- TEAM ASSIGNMENT SECTION -->
   <div id="teamAssignmentSection" style="display: none;">
-    <div class="team-assignment-panel">
+    <div class="panel">
       <h3 style="margin-bottom: 0.5rem;">🏆 Team Assignment Per Sport</h3>
-      <p style="margin-bottom: 1rem; color: #4a627a;">Assign participants to the four nations based on the Avatar: The Last Airbender theme. Select a sport below to view and assign players for that specific event.</p>
+      <p style="margin-bottom: 1rem; color: #4a627a;">Assign participants to the four nations based on the Avatar: The Last Airbender theme.</p>
       
       <div class="sport-tabs" id="sportTabs">
-        <button class="sport-tab active" data-sport="all">🏆 All Participants</button>
+        <button class="sport-tab active" data-sport="all">🏆 All</button>
         <button class="sport-tab" data-sport="Pickleball">🏓 Pickleball</button>
         <button class="sport-tab" data-sport="Volleyball">🏐 Volleyball</button>
-        <button class="sport-tab" data-sport="Mobile Legends">📱 Mobile Legends</button>
+        <button class="sport-tab" data-sport="Mobile Legends">📱 ML</button>
         <button class="sport-tab" data-sport="Chess">♟️ Chess</button>
         <button class="sport-tab" data-sport="Scrabble">🔤 Scrabble</button>
       </div>
@@ -708,37 +454,18 @@
 
   <!-- MEDICAL CONDITIONS SECTION -->
   <div id="medicalConditionsSection" style="display: none;">
-    <div class="medical-panel">
+    <div class="panel">
       <h3 style="margin-bottom: 0.5rem;">🩺 Participants with Medical Conditions</h3>
-      <p style="margin-bottom: 1rem; color: #4a627a;">List of all registrants who have declared medical conditions. Please ensure proper accommodations are made for their safety during the sportsfest.</p>
+      <p style="margin-bottom: 1rem; color: #4a627a;">List of all registrants who have declared medical conditions.</p>
       
       <div class="filter-bar">
-        <div class="filter-group">
-          <label>🔍 Search Name</label>
-          <input type="text" id="medicalSearchInput" placeholder="Search by name...">
-        </div>
-        <div class="filter-group">
-          <label>🎯 Filter by Sport</label>
-          <select id="medicalSportFilter">
-            <option value="all">All Sports</option>
-            <option value="Pickleball">Pickleball</option>
-            <option value="Volleyball">Volleyball</option>
-            <option value="Mobile Legends">Mobile Legends</option>
-            <option value="Chess">Chess</option>
-            <option value="Scrabble">Scrabble</option>
-          </select>
-        </div>
-        <div class="filter-actions">
-          <button id="clearMedicalFiltersBtn" class="clear-filters-btn">🗑️ Clear Filters</button>
-          <button id="exportMedicalCsvBtn" class="export-btn">📎 Export Medical List</button>
-        </div>
+        <div class="filter-group"><label>🔍 Search Name</label><input type="text" id="medicalSearchInput" placeholder="Search by name..."></div>
+        <div class="filter-group"><label>🎯 Filter by Sport</label><select id="medicalSportFilter"><option value="all">All Sports</option><option>Pickleball</option><option>Volleyball</option><option>Mobile Legends</option><option>Chess</option><option>Scrabble</option></select></div>
+        <div class="filter-actions"><button id="clearMedicalFiltersBtn" class="clear-filters-btn">🗑️ Clear</button><button id="exportMedicalCsvBtn" class="export-btn">📎 Export</button></div>
       </div>
       
       <div id="medicalStats" class="filter-stats"></div>
-      
-      <div id="medicalListContainer" style="margin-top: 1.5rem;">
-        <!-- Medical conditions list will be populated here -->
-      </div>
+      <div id="medicalListContainer" style="margin-top: 1.5rem;"></div>
     </div>
   </div>
 
@@ -752,14 +479,76 @@
   </div>
 </div>
 
+<!-- Detail Modal -->
 <div id="detailModal" class="modal-overlay">
   <div class="modal-container" id="modalContent"></div>
+</div>
+
+<!-- Result Modal -->
+<div id="resultModal" class="modal-overlay">
+  <div class="modal-container">
+    <h3 id="resultModalTitle">🏅 Add New Result</h3>
+    <form id="resultForm">
+      <label>Sport *</label>
+      <select id="resultSport" required>
+        <option value="">Select Sport</option>
+        <option value="Pickleball">🏓 Pickleball</option>
+        <option value="Volleyball">🏐 Volleyball</option>
+        <option value="Mobile Legends">📱 Mobile Legends</option>
+        <option value="Chess">♟️ Chess</option>
+        <option value="Scrabble">🔤 Scrabble</option>
+      </select>
+      
+      <label>Team 1 (Home) *</label>
+      <select id="resultTeam1" required>
+        <option value="">Select Team 1</option>
+        <option value="Water Tribe">💧 Water Tribe</option>
+        <option value="Earth Kingdom">🌍 Earth Kingdom</option>
+        <option value="Fire Nation">🔥 Fire Nation</option>
+        <option value="Air Nomads">🍃 Air Nomads</option>
+      </select>
+      
+      <label>Team 1 Players (comma separated)</label>
+      <textarea id="resultTeam1Players" rows="2" placeholder="Enter player names separated by commas"></textarea>
+      
+      <label style="text-align: center; font-size: 1.2rem; color: #1e6fdf; margin: 0.5rem 0;">⚔️ VS ⚔️</label>
+      
+      <label>Team 2 (Away) *</label>
+      <select id="resultTeam2" required>
+        <option value="">Select Team 2</option>
+        <option value="Water Tribe">💧 Water Tribe</option>
+        <option value="Earth Kingdom">🌍 Earth Kingdom</option>
+        <option value="Fire Nation">🔥 Fire Nation</option>
+        <option value="Air Nomads">🍃 Air Nomads</option>
+      </select>
+      
+      <label>Team 2 Players (comma separated)</label>
+      <textarea id="resultTeam2Players" rows="2" placeholder="Enter player names separated by commas"></textarea>
+      
+      <label>Winner *</label>
+      <select id="resultWinner" required>
+        <option value="">Select Winner</option>
+        <option value="Water Tribe">💧 Water Tribe</option>
+        <option value="Earth Kingdom">🌍 Earth Kingdom</option>
+        <option value="Fire Nation">🔥 Fire Nation</option>
+        <option value="Air Nomads">🍃 Air Nomads</option>
+      </select>
+      
+      <label>Score / Result *</label>
+      <input type="text" id="resultScore" placeholder="e.g., 2-1, 150-120, Champion" required>
+      
+      <div class="btn-row">
+        <button type="button" id="cancelResultBtn" style="background:#e2e8f0;color:#1f2937;">Cancel</button>
+        <button type="submit" id="saveResultBtn" style="background:#1e6fdf;color:white;">Save Result</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC2jwodhMqk3_fHYZiM8oPeRBb4MtXcMzQ",
@@ -776,18 +565,28 @@
   const db = getFirestore(app);
 
   let allRegistrations = [];
+  let allResults = [];
   let charts = { gender: null, sport: null, shirt: null };
   let currentSportFilter = "all";
+  let editingResultId = null;
   
   const teams = [
-    { id: "water", name: "Water Tribe", color: "#2563eb", bgLight: "#e0f0ff", icon: "💧" },
-    { id: "earth", name: "Earth Kingdom", color: "#16a34a", bgLight: "#e0f7e8", icon: "🌍" },
-    { id: "fire", name: "Fire Nation", color: "#dc2626", bgLight: "#fee2e2", icon: "🔥" },
-    { id: "air", name: "Air Nomads", color: "#eab308", bgLight: "#fef3c7", icon: "🍃" }
+    { id: "water", name: "Water Tribe", color: "#2563eb", icon: "💧" },
+    { id: "earth", name: "Earth Kingdom", color: "#16a34a", icon: "🌍" },
+    { id: "fire", name: "Fire Nation", color: "#dc2626", icon: "🔥" },
+    { id: "air", name: "Air Nomads", color: "#eab308", icon: "🍃" }
   ];
+
+  const teamIcons = {
+    'Water Tribe': '💧',
+    'Earth Kingdom': '🌍',
+    'Fire Nation': '🔥',
+    'Air Nomads': '🍃'
+  };
 
   const DOM = {
     dashboardSection: document.getElementById('dashboardSection'),
+    resultsSection: document.getElementById('resultsSection'),
     teamAssignmentSection: document.getElementById('teamAssignmentSection'),
     medicalConditionsSection: document.getElementById('medicalConditionsSection'),
     statisticsSection: document.getElementById('statisticsSection'),
@@ -798,11 +597,27 @@
     membershipFilter: document.getElementById('membershipFilterSelect'),
     yearJoinedFilter: document.getElementById('yearJoinedFilterSelect'),
     sportFilter: document.getElementById('sportFilterSelect'),
+    statusFilter: document.getElementById('statusFilterSelect'),
     exportBtn: document.getElementById('exportCsvBtn'),
     clearFiltersBtn: document.getElementById('clearFiltersBtn'),
     filterStatsDiv: document.getElementById('filterStats'),
     modalOverlay: document.getElementById('detailModal'),
     modalContent: document.getElementById('modalContent'),
+    resultModal: document.getElementById('resultModal'),
+    resultForm: document.getElementById('resultForm'),
+    resultSport: document.getElementById('resultSport'),
+    resultTeam1: document.getElementById('resultTeam1'),
+    resultTeam1Players: document.getElementById('resultTeam1Players'),
+    resultTeam2: document.getElementById('resultTeam2'),
+    resultTeam2Players: document.getElementById('resultTeam2Players'),
+    resultWinner: document.getElementById('resultWinner'),
+    resultScore: document.getElementById('resultScore'),
+    cancelResultBtn: document.getElementById('cancelResultBtn'),
+    saveResultBtn: document.getElementById('saveResultBtn'),
+    resultModalTitle: document.getElementById('resultModalTitle'),
+    resultsListContainer: document.getElementById('resultsListContainer'),
+    addResultBtn: document.getElementById('addResultBtn'),
+    viewResultsBtn: document.getElementById('viewResultsBtn'),
     teamCardsContainer: document.getElementById('teamCardsContainer'),
     sportTabs: document.getElementById('sportTabs'),
     medicalSearchInput: document.getElementById('medicalSearchInput'),
@@ -822,12 +637,480 @@
     setTimeout(() => toast.remove(), 3000);
   }
 
-  // Function to get participants with medical conditions
+  // ============ RESULTS FUNCTIONS ============
+  async function fetchResults() {
+    try {
+      const q = query(collection(db, "sportsfest_results"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      allResults = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderResultsList();
+      renderWidgets();
+    } catch (err) {
+      console.error("Error fetching results:", err);
+    }
+  }
+
+  function renderResultsList() {
+    if (!allResults.length) {
+      DOM.resultsListContainer.innerHTML = '<div class="empty-state">📭 No results posted yet. Click "Add Result" to create one.</div>';
+      return;
+    }
+    
+    let html = '';
+    allResults.forEach(r => {
+      const team1Icon = teamIcons[r.team1] || '🏅';
+      const team2Icon = teamIcons[r.team2] || '🏅';
+      const winnerIcon = teamIcons[r.winner] || '🏅';
+      
+      html += `
+        <div class="result-item">
+          <div class="result-info">
+            <div class="result-sport">${r.sport}</div>
+            <div class="result-details">
+              <span class="result-team" style="background: ${r.team1 === 'Water Tribe' ? '#2563eb' : r.team1 === 'Earth Kingdom' ? '#16a34a' : r.team1 === 'Fire Nation' ? '#dc2626' : '#eab308'}; color: ${r.team1 === 'Air Nomads' ? '#422006' : 'white'};">${team1Icon} ${r.team1}</span>
+              <span class="vs-text">⚔️ VS ⚔️</span>
+              <span class="result-team" style="background: ${r.team2 === 'Water Tribe' ? '#2563eb' : r.team2 === 'Earth Kingdom' ? '#16a34a' : r.team2 === 'Fire Nation' ? '#dc2626' : '#eab308'}; color: ${r.team2 === 'Air Nomads' ? '#422006' : 'white'};">${team2Icon} ${r.team2}</span>
+              <span style="margin: 0 6px;">→</span>
+              <span class="result-score" style="background: #d1fae5; color: #065f46;">🏆 ${winnerIcon} ${r.winner}</span>
+              <span class="result-score">${r.score}</span>
+            </div>
+            ${(r.team1Players || r.team2Players) ? `<div class="player-names">
+              ${r.team1Players ? `👤 ${r.team1}: ${r.team1Players}` : ''}
+              ${r.team1Players && r.team2Players ? ' | ' : ''}
+              ${r.team2Players ? `👤 ${r.team2}: ${r.team2Players}` : ''}
+            </div>` : ''}
+            <div style="font-size: 0.65rem; color: #6c8db0; margin-top: 2px;">${r.createdAt?.toDate ? r.createdAt.toDate().toLocaleString() : ''}</div>
+          </div>
+          <div class="result-actions">
+            <button class="edit-result-btn" data-id="${r.id}">✏️ Edit</button>
+            <button class="delete-result-btn" data-id="${r.id}">🗑️ Delete</button>
+          </div>
+        </div>
+      `;
+    });
+    
+    DOM.resultsListContainer.innerHTML = html;
+    
+    document.querySelectorAll('.edit-result-btn').forEach(btn => {
+      btn.addEventListener('click', () => editResult(btn.dataset.id));
+    });
+    document.querySelectorAll('.delete-result-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (confirm('Delete this result?')) {
+          await deleteDoc(doc(db, "sportsfest_results", btn.dataset.id));
+          await fetchResults();
+          showToast('Result deleted successfully');
+        }
+      });
+    });
+  }
+
+  function editResult(id) {
+    const r = allResults.find(result => result.id === id);
+    if (!r) return;
+    editingResultId = id;
+    DOM.resultModalTitle.innerText = '✏️ Edit Result';
+    DOM.resultSport.value = r.sport;
+    DOM.resultTeam1.value = r.team1;
+    DOM.resultTeam1Players.value = r.team1Players || '';
+    DOM.resultTeam2.value = r.team2;
+    DOM.resultTeam2Players.value = r.team2Players || '';
+    DOM.resultWinner.value = r.winner;
+    DOM.resultScore.value = r.score;
+    DOM.resultModal.classList.add('active');
+  }
+
+  // ============ RESULT FORM HANDLERS ============
+  DOM.addResultBtn?.addEventListener('click', () => {
+    editingResultId = null;
+    DOM.resultModalTitle.innerText = '🏅 Add New Result';
+    DOM.resultForm.reset();
+    DOM.resultModal.classList.add('active');
+  });
+
+  DOM.cancelResultBtn?.addEventListener('click', () => {
+    DOM.resultModal.classList.remove('active');
+  });
+
+  DOM.resultForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const sport = DOM.resultSport.value;
+    const team1 = DOM.resultTeam1.value;
+    const team1Players = DOM.resultTeam1Players.value.trim();
+    const team2 = DOM.resultTeam2.value;
+    const team2Players = DOM.resultTeam2Players.value.trim();
+    const winner = DOM.resultWinner.value;
+    const score = DOM.resultScore.value.trim();
+
+    if (!sport || !team1 || !team2 || !winner || !score) {
+      showToast('Please fill in all required fields.', true);
+      return;
+    }
+
+    if (team1 === team2) {
+      showToast('Team 1 and Team 2 must be different.', true);
+      return;
+    }
+
+    const data = { 
+      sport, 
+      team1,
+      team1Players: team1Players || '',
+      team2,
+      team2Players: team2Players || '',
+      winner, 
+      score, 
+      updatedAt: new Date()
+    };
+
+    try {
+      if (editingResultId) {
+        await updateDoc(doc(db, "sportsfest_results", editingResultId), data);
+        showToast('Result updated successfully');
+      } else {
+        await addDoc(collection(db, "sportsfest_results"), { 
+          ...data, 
+          createdAt: new Date() 
+        });
+        showToast('Result added successfully');
+      }
+      DOM.resultModal.classList.remove('active');
+      await fetchResults();
+    } catch (err) {
+      console.error(err);
+      showToast('Error saving result', true);
+    }
+  });
+
+  // Close result modal on outside click
+  DOM.resultModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.resultModal) DOM.resultModal.classList.remove('active');
+  });
+
+  // View Results Page
+  DOM.viewResultsBtn?.addEventListener('click', () => {
+    window.open('results.html', '_blank');
+  });
+
+  // ============ REGISTRATION FUNCTIONS ============
+  function getFilteredRegistrations() {
+    const searchTerm = DOM.searchInput.value.toLowerCase();
+    const ageVal = DOM.ageFilter.value;
+    const membershipVal = DOM.membershipFilter.value;
+    const yearVal = DOM.yearJoinedFilter.value;
+    const sportVal = DOM.sportFilter.value;
+    const statusVal = DOM.statusFilter.value;
+
+    return allRegistrations.filter(reg => {
+      if (!reg.fullName?.toLowerCase().includes(searchTerm)) return false;
+      if (ageVal !== 'all') {
+        if (ageVal === 'below30' && reg.age > 29) return false;
+        if (ageVal === 'above30' && (reg.age < 30 || reg.age > 39)) return false;
+        if (ageVal === 'above40' && reg.age < 40) return false;
+      }
+      if (membershipVal !== 'all' && reg.membershipStatus !== membershipVal) return false;
+      if (yearVal !== 'all' && reg.yearJoined !== yearVal) return false;
+      if (sportVal && (!reg.sportsParticipating || !reg.sportsParticipating.includes(sportVal))) return false;
+      if (statusVal !== 'all' && reg.registrationStatus !== statusVal) return false;
+      return true;
+    });
+  }
+
+  function updateFilterStats(filteredCount) {
+    const totalCount = allRegistrations.length;
+    DOM.filterStatsDiv.innerHTML = filteredCount === totalCount 
+      ? `📊 Showing all ${totalCount} registrations`
+      : `📊 Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
+  }
+
+  async function fetchRegistrations() {
+    try {
+      const q = query(collection(db, "sportsfest_registrations"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      allRegistrations = snapshot.docs.map(docSnap => ({ 
+        id: docSnap.id, 
+        ...docSnap.data(),
+        registrationStatus: docSnap.data().registrationStatus || 'pending'
+      }));
+      populateYearFilter();
+      renderTable();
+      renderWidgets();
+      renderTeamCards();
+      renderMedicalConditions();
+      renderCharts();
+    } catch (err) {
+      console.error(err);
+      showToast("Error loading data", true);
+    }
+  }
+
+  function populateYearFilter() {
+    const years = new Set();
+    allRegistrations.forEach(reg => {
+      if (reg.yearJoined) years.add(reg.yearJoined);
+    });
+    const sortedYears = Array.from(years).sort((a, b) => b - a);
+    DOM.yearJoinedFilter.innerHTML = '<option value="all">All Years</option>';
+    sortedYears.forEach(year => {
+      DOM.yearJoinedFilter.innerHTML += `<option value="${year}">${year}</option>`;
+    });
+  }
+
+  function renderWidgets() {
+    const total = allRegistrations.length;
+    const confirmed = allRegistrations.filter(r => r.registrationStatus === 'confirmed').length;
+    const pending = allRegistrations.filter(r => r.registrationStatus !== 'confirmed').length;
+    const resultsCount = allResults.length;
+    
+    DOM.widgetsContainer.innerHTML = `
+      <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">${total}</div></div>
+      <div class="widget-card"><h4>✅ Confirmed</h4><div class="widget-number">${confirmed}</div></div>
+      <div class="widget-card"><h4>⏳ Pending</h4><div class="widget-number">${pending}</div></div>
+      <div class="widget-card"><h4>🏅 Results</h4><div class="widget-number">${resultsCount}</div></div>
+    `;
+  }
+
+  function getTeamBadgeForDisplay(participant) {
+    if (!participant.teamAssignments) return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
+    if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
+      for (const sport of participant.sportsParticipating) {
+        const teamId = participant.teamAssignments[sport];
+        if (teamId) {
+          const team = teams.find(t => t.id === teamId);
+          if (team) {
+            return `<span class="team-badge-sm" style="background: ${team.color};">${team.icon} ${team.name}</span>`;
+          }
+        }
+      }
+    }
+    return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
+  }
+
+  function renderTable() {
+    const filtered = getFilteredRegistrations();
+    updateFilterStats(filtered.length);
+
+    if (filtered.length === 0) {
+      DOM.tableBody.innerHTML = '<tr><td colspan="9" class="empty-state">✨ No registrations match your filters</td></tr>';
+      return;
+    }
+    
+    DOM.tableBody.innerHTML = filtered.map(reg => `
+      <tr>
+        <td><strong>${escapeHtml(reg.fullName || '')}</strong></td>
+        <td>${reg.age || '—'}</td>
+        <td>${reg.yearJoined || '—'}</td>
+        <td><span style="background:${reg.membershipStatus === 'Regular' ? '#e0f0ff' : '#f0e6ff'}; padding:4px 10px; border-radius:20px; font-size:0.7rem;">${reg.membershipStatus || '—'}</span></td>
+        <td>${reg.gender || '—'}</td>
+        <td>${Array.isArray(reg.sportsParticipating) ? reg.sportsParticipating.join(', ') : '—'}</td>
+        <td>${reg.shirtSize || '—'}</td>
+        <td><span style="background:${reg.registrationStatus === 'confirmed' ? '#d1fae5' : '#fed7aa'}; padding:2px 10px; border-radius:20px; font-size:0.7rem;">${reg.registrationStatus === 'confirmed' ? 'Confirmed' : 'Pending'}</span></td>
+        <td>
+          <button class="action-btn view-btn" data-id="${reg.id}">👁️ View</button>
+          <button class="action-btn delete-btn" data-id="${reg.id}">🗑️ Delete</button>
+          <button class="action-btn" data-id="${reg.id}" data-status="confirmed" style="background:#059669;color:white;">✓ Confirm</button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => showDetails(btn.getAttribute('data-id')));
+    });
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (confirm('⚠️ Permanently delete this registration?')) {
+          const id = btn.getAttribute('data-id');
+          await deleteDoc(doc(db, "sportsfest_registrations", id));
+          showToast('Registration deleted successfully');
+          await fetchRegistrations();
+        }
+      });
+    });
+    document.querySelectorAll('[data-status="confirmed"]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        await updateDoc(doc(db, "sportsfest_registrations", id), { registrationStatus: 'confirmed' });
+        showToast('Registration confirmed');
+        await fetchRegistrations();
+      });
+    });
+  }
+
+  function showDetails(id) {
+    const reg = allRegistrations.find(r => r.id === id);
+    if (!reg) return;
+    
+    let teamInfo = '';
+    if (reg.teamAssignments && reg.sportsParticipating) {
+      teamInfo = '<p><strong>Team Assignments by Sport:</strong></p><ul>';
+      reg.sportsParticipating.forEach(sport => {
+        const teamId = reg.teamAssignments[sport];
+        const team = teams.find(t => t.id === teamId);
+        teamInfo += `<li>${sport}: ${team ? `${team.icon} ${team.name}` : 'Not assigned'}</li>`;
+      });
+      teamInfo += '</ul>';
+    }
+    
+    DOM.modalContent.innerHTML = `
+      <h3 style="margin-bottom: 1rem;">📄 Participant Details</h3>
+      <p><strong>Full Name:</strong> ${escapeHtml(reg.fullName)}</p>
+      <p><strong>Age:</strong> ${reg.age}</p>
+      <p><strong>Year Joined:</strong> ${reg.yearJoined}</p>
+      <p><strong>Membership:</strong> ${reg.membershipStatus}</p>
+      <p><strong>Gender:</strong> ${reg.gender}</p>
+      <p><strong>Address:</strong> ${reg.address || '—'}</p>
+      <p><strong>Contact:</strong> ${reg.contactNumber}</p>
+      <p><strong>Emergency Contact:</strong> ${reg.emergencyContactName} (${reg.emergencyRelationship}) - ${reg.emergencyContactNumber}</p>
+      <p><strong>Shirt Size:</strong> ${reg.shirtSize}</p>
+      <p><strong>Sports:</strong> ${reg.sportsParticipating?.join(', ')}</p>
+      <p><strong>Medical Condition:</strong> <span style="color: #b91c1c; font-weight: 600;">${reg.medicalCondition || 'None'}</span></p>
+      <p><strong>Waiver Date:</strong> ${reg.waiverDate}</p>
+      <p><strong>Status:</strong> ${reg.registrationStatus}</p>
+      ${teamInfo}
+      <button class="action-btn" id="closeModalBtn" style="margin-top: 1rem;">Close</button>
+    `;
+    DOM.modalOverlay.classList.add('active');
+    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+      DOM.modalOverlay.classList.remove('active');
+    });
+  }
+
+  // ============ TEAM ASSIGNMENT FUNCTIONS ============
+  function getParticipantTeamForSport(participant, sportEvent) {
+    if (!participant.teamAssignments) return null;
+    if (sportEvent === "all") {
+      for (const sport of participant.sportsParticipating || []) {
+        if (participant.teamAssignments[sport]) return participant.teamAssignments[sport];
+      }
+      return null;
+    }
+    return participant.teamAssignments[sportEvent] || null;
+  }
+
+  async function updateParticipantTeam(participantId, teamId, sportEvent = null) {
+    try {
+      const participant = allRegistrations.find(r => r.id === participantId);
+      if (!participant) return;
+      
+      let currentAssignments = participant.teamAssignments || {};
+      
+      if (sportEvent && sportEvent !== "all") {
+        currentAssignments[sportEvent] = teamId;
+      } else if (teamId === null) {
+        currentAssignments = {};
+      } else {
+        if (participant.sportsParticipating) {
+          participant.sportsParticipating.forEach(sport => {
+            currentAssignments[sport] = teamId;
+          });
+        }
+      }
+      
+      await updateDoc(doc(db, "sportsfest_registrations", participantId), { teamAssignments: currentAssignments });
+      
+      const index = allRegistrations.findIndex(r => r.id === participantId);
+      if (index !== -1) {
+        allRegistrations[index].teamAssignments = currentAssignments;
+      }
+      
+      renderTable();
+      renderTeamCards();
+      showToast(`Team assignment updated`);
+    } catch (error) {
+      console.error("Error updating team:", error);
+      showToast("Failed to update team", true);
+    }
+  }
+
+  function renderTeamCards() {
+    const sportFilter = currentSportFilter;
+    
+    let participantsToShow = allRegistrations;
+    if (sportFilter !== "all") {
+      participantsToShow = allRegistrations.filter(p => 
+        p.sportsParticipating && p.sportsParticipating.includes(sportFilter)
+      );
+    }
+    
+    const teamMembers = { water: [], earth: [], fire: [], air: [], unassigned: [] };
+    
+    participantsToShow.forEach(p => {
+      const assignedTeam = getParticipantTeamForSport(p, sportFilter);
+      if (assignedTeam && teamMembers[assignedTeam]) {
+        teamMembers[assignedTeam].push(p);
+      } else {
+        teamMembers.unassigned.push(p);
+      }
+    });
+    
+    let html = '';
+    teams.forEach(team => {
+      const members = teamMembers[team.id] || [];
+      html += `
+        <div class="team-card" style="border-left-color: ${team.color};">
+          <h4>${team.icon} ${team.name}</h4>
+          <div class="member-count">${members.length} participants</div>
+          <ul>
+            ${members.map(m => `
+              <li>
+                <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
+                <button class="remove-from-team" data-id="${m.id}" data-sport="${sportFilter}">✖</button>
+              </li>
+            `).join('')}
+            ${members.length === 0 ? '<li style="color: #9ca3af;">No participants assigned yet</li>' : ''}
+          </ul>
+        </div>
+      `;
+    });
+    
+    const unassigned = teamMembers.unassigned || [];
+    html += `
+      <div class="team-card" style="border-left-color: #9ca3af;">
+        <h4>❓ Unassigned</h4>
+        <div class="member-count">${unassigned.length} participants</div>
+        <ul>
+          ${unassigned.map(m => `
+            <li>
+              <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
+              <div style="display: flex; gap: 4px;">
+                ${teams.map(t => `<button class="assign-quick" data-id="${m.id}" data-team="${t.id}" data-sport="${sportFilter}" style="background: ${t.color}; color: white; padding: 2px 6px; margin: 0 2px; border: none; border-radius: 20px; font-size: 0.6rem;">${t.icon}</button>`).join('')}
+              </div>
+            </li>
+          `).join('')}
+          ${unassigned.length === 0 ? '<li style="color: #9ca3af;">All participants assigned</li>' : ''}
+        </ul>
+      </div>
+    `;
+    
+    DOM.teamCardsContainer.innerHTML = html;
+    
+    document.querySelectorAll('.assign-quick').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        const teamId = btn.getAttribute('data-team');
+        const sportEvent = btn.getAttribute('data-sport');
+        await updateParticipantTeam(id, teamId, sportEvent === "all" ? null : sportEvent);
+        renderTeamCards();
+        renderTable();
+      });
+    });
+    
+    document.querySelectorAll('.remove-from-team').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        const sportEvent = btn.getAttribute('data-sport');
+        await updateParticipantTeam(id, null, sportEvent === "all" ? null : sportEvent);
+        renderTeamCards();
+        renderTable();
+      });
+    });
+  }
+
+  // ============ MEDICAL FUNCTIONS ============
   function getParticipantsWithMedicalConditions() {
     return allRegistrations.filter(p => p.medicalCondition && p.medicalCondition !== 'None');
   }
 
-  // Render Medical Conditions List
   function renderMedicalConditions() {
     let participants = getParticipantsWithMedicalConditions();
     
@@ -870,323 +1153,7 @@
     });
   }
 
-  async function updateParticipantTeam(participantId, teamId, sportEvent = null) {
-    try {
-      const participant = allRegistrations.find(r => r.id === participantId);
-      if (!participant) return;
-      
-      let currentAssignments = participant.teamAssignments || {};
-      
-      if (sportEvent && sportEvent !== "all") {
-        currentAssignments[sportEvent] = teamId;
-      } else {
-        if (teamId === null) {
-          currentAssignments = {};
-        } else {
-          if (participant.sportsParticipating) {
-            participant.sportsParticipating.forEach(sport => {
-              currentAssignments[sport] = teamId;
-            });
-          }
-        }
-      }
-      
-      await updateDoc(doc(db, "sportsfest_registrations", participantId), { teamAssignments: currentAssignments });
-      
-      const index = allRegistrations.findIndex(r => r.id === participantId);
-      if (index !== -1) {
-        allRegistrations[index].teamAssignments = currentAssignments;
-      }
-      
-      renderTable();
-      renderTeamCards();
-      renderMedicalConditions();
-      showToast(`Team assignment updated successfully`);
-    } catch (error) {
-      console.error("Error updating team:", error);
-      showToast("Failed to update team", true);
-    }
-  }
-
-  function getParticipantTeamForSport(participant, sportEvent) {
-    if (!participant.teamAssignments) return null;
-    if (sportEvent === "all") {
-      if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
-        for (const sport of participant.sportsParticipating) {
-          if (participant.teamAssignments[sport]) return participant.teamAssignments[sport];
-        }
-      }
-      return null;
-    }
-    return participant.teamAssignments[sportEvent] || null;
-  }
-
-  function renderTeamCards() {
-    const sportFilter = currentSportFilter;
-    
-    let participantsToShow = allRegistrations;
-    if (sportFilter !== "all") {
-      participantsToShow = allRegistrations.filter(p => 
-        p.sportsParticipating && p.sportsParticipating.includes(sportFilter)
-      );
-    }
-    
-    const teamMembers = { water: [], earth: [], fire: [], air: [], unassigned: [] };
-    
-    participantsToShow.forEach(p => {
-      const assignedTeam = getParticipantTeamForSport(p, sportFilter);
-      if (assignedTeam && teamMembers[assignedTeam]) {
-        teamMembers[assignedTeam].push(p);
-      } else {
-        teamMembers.unassigned.push(p);
-      }
-    });
-    
-    let html = '';
-    teams.forEach(team => {
-      const members = teamMembers[team.id] || [];
-      html += `
-        <div class="team-card" style="border-left-color: ${team.color};">
-          <h4>${team.icon} ${team.name}</h4>
-          <div class="member-count">${members.length} participants</div>
-          <ul>
-            ${members.map(m => `
-              <li>
-                <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
-                <button class="remove-from-team" data-id="${m.id}" data-team="${team.id}" data-sport="${sportFilter}">✖</button>
-              </li>
-            `).join('')}
-            ${members.length === 0 ? '<li style="color: #9ca3af;">No participants assigned yet</li>' : ''}
-          </ul>
-        </div>
-      `;
-    });
-    
-    const unassigned = teamMembers.unassigned || [];
-    html += `
-      <div class="team-card" style="border-left-color: #9ca3af;">
-        <h4>❓ Unassigned</h4>
-        <div class="member-count">${unassigned.length} participants</div>
-        <ul>
-          ${unassigned.map(m => `
-            <li>
-              <span title="Sports: ${m.sportsParticipating?.join(', ') || 'None'}">${escapeHtml(m.fullName || '')}</span>
-              <div style="display: flex; gap: 4px;">
-                ${teams.map(t => `<button class="action-btn assign-quick" data-id="${m.id}" data-team="${t.id}" data-sport="${sportFilter}" style="background: ${t.color}; color: white; padding: 2px 6px; margin: 0 2px; font-size: 0.6rem;">${t.icon}</button>`).join('')}
-              </div>
-            </li>
-          `).join('')}
-          ${unassigned.length === 0 ? '<li style="color: #9ca3af;">All participants assigned</li>' : ''}
-        </ul>
-      </div>
-    `;
-    
-    DOM.teamCardsContainer.innerHTML = html;
-    
-    document.querySelectorAll('.assign-quick').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const id = btn.getAttribute('data-id');
-        const teamId = btn.getAttribute('data-team');
-        const sportEvent = btn.getAttribute('data-sport');
-        await updateParticipantTeam(id, teamId, sportEvent === "all" ? null : sportEvent);
-        renderTeamCards();
-        renderTable();
-      });
-    });
-    
-    document.querySelectorAll('.remove-from-team').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const id = btn.getAttribute('data-id');
-        const sportEvent = btn.getAttribute('data-sport');
-        await updateParticipantTeam(id, null, sportEvent === "all" ? null : sportEvent);
-        renderTeamCards();
-        renderTable();
-      });
-    });
-  }
-
-  function populateYearFilter() {
-    const years = new Set();
-    allRegistrations.forEach(reg => {
-      if (reg.yearJoined) years.add(reg.yearJoined);
-    });
-    const sortedYears = Array.from(years).sort((a, b) => b - a);
-    DOM.yearJoinedFilter.innerHTML = '<option value="all">All Years</option>';
-    sortedYears.forEach(year => {
-      DOM.yearJoinedFilter.innerHTML += `<option value="${year}">${year}</option>`;
-    });
-  }
-
-  function applyAgeFilter(age, filterValue) {
-    if (filterValue === 'all') return true;
-    if (filterValue === 'below30') return age >= 16 && age <= 29;
-    if (filterValue === 'above30') return age >= 30 && age <= 39;
-    if (filterValue === 'above40') return age >= 40 && age <= 60;
-    return true;
-  }
-
-  function getFilteredRegistrations() {
-    const searchTerm = DOM.searchInput.value.toLowerCase();
-    const ageVal = DOM.ageFilter.value;
-    const membershipVal = DOM.membershipFilter.value;
-    const yearVal = DOM.yearJoinedFilter.value;
-    const sportVal = DOM.sportFilter.value;
-
-    return allRegistrations.filter(reg => {
-      if (!reg.fullName?.toLowerCase().includes(searchTerm)) return false;
-      if (!applyAgeFilter(reg.age, ageVal)) return false;
-      if (membershipVal !== 'all' && reg.membershipStatus !== membershipVal) return false;
-      if (yearVal !== 'all' && reg.yearJoined !== yearVal) return false;
-      if (sportVal && (!reg.sportsParticipating || !reg.sportsParticipating.includes(sportVal))) return false;
-      return true;
-    });
-  }
-
-  function updateFilterStats(filteredCount) {
-    const totalCount = allRegistrations.length;
-    DOM.filterStatsDiv.innerHTML = filteredCount === totalCount 
-      ? `📊 Showing all ${totalCount} registrations`
-      : `📊 Showing ${filteredCount} of ${totalCount} registrations (filtered)`;
-  }
-
-  async function fetchRegistrations() {
-    try {
-      const q = query(collection(db, "sportsfest_registrations"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      allRegistrations = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
-      populateYearFilter();
-      renderWidgets();
-      renderTable();
-      renderTeamCards();
-      renderMedicalConditions();
-      renderCharts();
-    } catch (err) {
-      console.error(err);
-      showToast("Error loading data", true);
-    }
-  }
-
-  function renderWidgets() {
-    const total = allRegistrations.length;
-    const regular = allRegistrations.filter(r => r.membershipStatus === 'Regular').length;
-    const emeritus = allRegistrations.filter(r => r.membershipStatus === 'Emeritus').length;
-    let sportCounts = {};
-    allRegistrations.forEach(reg => {
-      if (reg.sportsParticipating && Array.isArray(reg.sportsParticipating)) {
-        reg.sportsParticipating.forEach(sport => {
-          sportCounts[sport] = (sportCounts[sport] || 0) + 1;
-        });
-      }
-    });
-    let mostPopular = "—";
-    let maxCount = 0;
-    for (let [sport, count] of Object.entries(sportCounts)) {
-      if (count > maxCount) { maxCount = count; mostPopular = sport; }
-    }
-    DOM.widgetsContainer.innerHTML = `
-      <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">${total}</div></div>
-      <div class="widget-card"><h4>Regular Members</h4><div class="widget-number">${regular}</div></div>
-      <div class="widget-card"><h4>Emeritus Members</h4><div class="widget-number">${emeritus}</div></div>
-      <div class="widget-card"><h4>🔥 Most Popular Sport</h4><div class="widget-number">${mostPopular !== "—" ? mostPopular : "N/A"}</div></div>
-    `;
-  }
-
-  function getTeamBadgeForDisplay(participant) {
-    if (!participant.teamAssignments) return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
-    if (participant.sportsParticipating && participant.sportsParticipating.length > 0) {
-      for (const sport of participant.sportsParticipating) {
-        const teamId = participant.teamAssignments[sport];
-        if (teamId) {
-          const team = teams.find(t => t.id === teamId);
-          if (team) {
-            return `<span class="team-badge-sm" style="background: ${team.color};">${team.icon} ${team.name}</span>`;
-          }
-        }
-      }
-    }
-    return '<span class="team-badge-sm team-unassigned">Unassigned</span>';
-  }
-
-  function renderTable() {
-    const filtered = getFilteredRegistrations();
-    updateFilterStats(filtered.length);
-
-    if (filtered.length === 0) {
-      DOM.tableBody.innerHTML = '<tr><td colspan="10" class="empty-state">✨ No registrations match your filters</td></tr>';
-      return;
-    }
-    
-    DOM.tableBody.innerHTML = filtered.map(reg => `
-      <tr>
-        <td><strong>${escapeHtml(reg.fullName || '')}</strong></td>
-        <td>${reg.age || '—'}</td>
-        <td>${reg.yearJoined || '—'}</td>
-        <td><span style="background:${reg.membershipStatus === 'Regular' ? '#e0f0ff' : '#f0e6ff'}; padding:4px 10px; border-radius:20px; font-size:0.75rem;">${reg.membershipStatus || '—'}</span></td>
-        <td>${reg.gender || '—'}</td>
-        <td>${Array.isArray(reg.sportsParticipating) ? reg.sportsParticipating.join(', ') : '—'}</td>
-        <td>${reg.shirtSize || '—'}</td>
-        <td>${reg.contactNumber || '—'}</td>
-        <td>${getTeamBadgeForDisplay(reg)}</td>
-        <td>
-          <button class="action-btn view-btn" data-id="${reg.id}">👁️ View</button>
-          <button class="action-btn delete-btn" data-id="${reg.id}">🗑️ Delete</button>
-        </td>
-      </tr>
-    `).join('');
-
-    document.querySelectorAll('.view-btn').forEach(btn => {
-      btn.addEventListener('click', () => showDetails(btn.getAttribute('data-id')));
-    });
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        if (confirm('⚠️ Permanently delete this registration?')) {
-          const id = btn.getAttribute('data-id');
-          await deleteDoc(doc(db, "sportsfest_registrations", id));
-          showToast('Registration deleted successfully');
-          await fetchRegistrations();
-        }
-      });
-    });
-  }
-
-  function showDetails(id) {
-    const reg = allRegistrations.find(r => r.id === id);
-    if (!reg) return;
-    
-    let teamInfo = '';
-    if (reg.teamAssignments && reg.sportsParticipating) {
-      teamInfo = '<p><strong>Team Assignments by Sport:</strong></p><ul>';
-      reg.sportsParticipating.forEach(sport => {
-        const teamId = reg.teamAssignments[sport];
-        const team = teams.find(t => t.id === teamId);
-        teamInfo += `<li>${sport}: ${team ? `${team.icon} ${team.name}` : 'Not assigned'}</li>`;
-      });
-      teamInfo += '</ul>';
-    }
-    
-    DOM.modalContent.innerHTML = `
-      <h3 style="margin-bottom: 1rem;">📄 Participant Details</h3>
-      <p><strong>Full Name:</strong> ${escapeHtml(reg.fullName)}</p>
-      <p><strong>Age:</strong> ${reg.age}</p>
-      <p><strong>Year Joined:</strong> ${reg.yearJoined}</p>
-      <p><strong>Membership:</strong> ${reg.membershipStatus}</p>
-      <p><strong>Gender:</strong> ${reg.gender}</p>
-      <p><strong>Address:</strong> ${reg.address || '—'}</p>
-      <p><strong>Contact:</strong> ${reg.contactNumber}</p>
-      <p><strong>Emergency Contact:</strong> ${reg.emergencyContactName} (${reg.emergencyRelationship}) - ${reg.emergencyContactNumber}</p>
-      <p><strong>Shirt Size:</strong> ${reg.shirtSize}</p>
-      <p><strong>Sports:</strong> ${reg.sportsParticipating?.join(', ')}</p>
-      <p><strong>Medical Condition:</strong> <span style="color: #b91c1c; font-weight: 600;">${reg.medicalCondition || 'None'}</span></p>
-      <p><strong>Waiver Date:</strong> ${reg.waiverDate}</p>
-      ${teamInfo}
-      <button class="action-btn" id="closeModalBtn" style="margin-top: 1rem;">Close</button>
-    `;
-    DOM.modalOverlay.classList.add('active');
-    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
-      DOM.modalOverlay.classList.remove('active');
-    });
-  }
-
+  // ============ CHART FUNCTIONS ============
   function renderCharts() {
     if (!allRegistrations.length) return;
     const genderMap = { Male: 0, Female: 0, 'Non-binary': 0, 'Prefer not to say': 0 };
@@ -1205,7 +1172,11 @@
     charts.shirt = new Chart(document.getElementById('shirtChart'), { type: 'pie', data: { labels: Object.keys(shirtMap), datasets: [{ data: Object.values(shirtMap), backgroundColor: ['#0f3b6f', '#1e6fdf', '#4b8fd8', '#7aade0', '#a6c8f0', '#cde2fe', '#f3c6b0'] }] } });
   }
 
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+  // ============ UTILITY FUNCTIONS ============
+  function escapeHtml(str) { 
+    if (!str) return ''; 
+    return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m]); 
+  }
 
   function clearFilters() {
     DOM.searchInput.value = '';
@@ -1213,6 +1184,7 @@
     DOM.membershipFilter.value = 'all';
     DOM.yearJoinedFilter.value = 'all';
     DOM.sportFilter.value = '';
+    DOM.statusFilter.value = 'all';
     renderTable();
   }
   
@@ -1222,30 +1194,20 @@
     renderMedicalConditions();
   }
 
+  // ============ EVENT LISTENERS ============
   DOM.exportBtn?.addEventListener('click', () => {
     const filtered = getFilteredRegistrations();
     if (!filtered.length) { showToast('No data to export', true); return; }
-    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Emergency Name","Waiver Date","Assigned Team","Medical Condition"]];
+    let csvRows = [["Full Name","Age","Year Joined","Membership","Gender","Sports","Shirt Size","Contact","Status","Medical Condition"]];
     filtered.forEach(r => {
-      let teamName = "Unassigned";
-      if (r.teamAssignments && r.sportsParticipating && r.sportsParticipating.length > 0) {
-        for (const sport of r.sportsParticipating) {
-          const teamId = r.teamAssignments[sport];
-          if (teamId) {
-            const team = teams.find(t => t.id === teamId);
-            teamName = team ? `${team.icon} ${team.name}` : "Unassigned";
-            break;
-          }
-        }
-      }
-      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.emergencyContactName, r.waiverDate, teamName, r.medicalCondition || 'None']);
+      csvRows.push([r.fullName, r.age, r.yearJoined, r.membershipStatus, r.gender, (r.sportsParticipating||[]).join(";"), r.shirtSize, r.contactNumber, r.registrationStatus, r.medicalCondition || 'None']);
     });
     const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.setAttribute('download', 'waraya_registrations_full.csv');
+    link.setAttribute('download', 'waraya_registrations.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1278,11 +1240,13 @@
   DOM.membershipFilter?.addEventListener('change', () => renderTable());
   DOM.yearJoinedFilter?.addEventListener('change', () => renderTable());
   DOM.sportFilter?.addEventListener('change', () => renderTable());
+  DOM.statusFilter?.addEventListener('change', () => renderTable());
   DOM.clearFiltersBtn?.addEventListener('click', clearFilters);
   DOM.clearMedicalFiltersBtn?.addEventListener('click', clearMedicalFilters);
   DOM.medicalSearchInput?.addEventListener('input', () => renderMedicalConditions());
   DOM.medicalSportFilter?.addEventListener('change', () => renderMedicalConditions());
 
+  // Sport tabs for team assignment
   if (DOM.sportTabs) {
     DOM.sportTabs.querySelectorAll('.sport-tab').forEach(tab => {
       tab.addEventListener('click', () => {
@@ -1294,6 +1258,7 @@
     });
   }
 
+  // Navigation
   const navLinks = document.querySelectorAll('.sidebar nav a');
   navLinks.forEach(link => {
     if (link.id !== 'logoutBtn') {
@@ -1301,12 +1266,14 @@
         e.preventDefault();
         const section = link.getAttribute('data-section');
         DOM.dashboardSection.style.display = section === 'dashboard' ? 'block' : 'none';
+        DOM.resultsSection.style.display = section === 'results' ? 'block' : 'none';
         DOM.teamAssignmentSection.style.display = section === 'teamAssignment' ? 'block' : 'none';
         DOM.medicalConditionsSection.style.display = section === 'medicalConditions' ? 'block' : 'none';
         DOM.statisticsSection.style.display = section === 'statistics' ? 'block' : 'none';
         if (section === 'statistics') renderCharts();
         if (section === 'teamAssignment') renderTeamCards();
         if (section === 'medicalConditions') renderMedicalConditions();
+        if (section === 'results') fetchResults();
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         if (window.innerWidth <= 860) {
@@ -1321,6 +1288,7 @@
     window.location.href = 'login.html';
   });
 
+  // Mobile sidebar handlers
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const closeSidebarBtn = document.getElementById('closeSidebarBtn');
   const sidebar = document.getElementById('sidebar');
@@ -1341,19 +1309,21 @@
     }
   });
 
+  // Date time live
   function updateDateTime() {
     document.getElementById('datetime').innerText = new Date().toLocaleString();
   }
   setInterval(updateDateTime, 1000);
   updateDateTime();
 
+  // Auth check
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = 'login.html';
       return;
     }
     document.getElementById('roleBadge').innerText = "Admin";
-    await fetchRegistrations();
+    await Promise.all([fetchRegistrations(), fetchResults()]);
   });
 
   DOM.modalOverlay?.addEventListener('click', (e) => {
