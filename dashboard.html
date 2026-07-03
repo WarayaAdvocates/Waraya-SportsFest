@@ -267,7 +267,7 @@
 
     .modal-container {
       background: white;
-      max-width: 650px;
+      max-width: 700px;
       width: 90%;
       border-radius: 48px;
       padding: 2rem;
@@ -288,7 +288,7 @@
       outline: none;
       font-family: 'Poppins', sans-serif;
     }
-    .modal-container textarea { border-radius: 20px; resize: vertical; min-height: 80px; }
+    .modal-container textarea { border-radius: 20px; resize: vertical; min-height: 60px; }
     .modal-container input:focus, .modal-container select:focus, .modal-container textarea:focus {
       border-color: #1e6fdf;
       box-shadow: 0 0 0 3px rgba(30,111,223,0.1);
@@ -344,7 +344,7 @@
     .result-item:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .result-item .result-info { display: flex; flex-direction: column; gap: 2px; }
     .result-item .result-sport { font-weight: 700; color: #0a2540; font-size: 0.95rem; }
-    .result-item .result-details { font-size: 0.8rem; color: #4a627a; }
+    .result-item .result-details { font-size: 0.8rem; color: #4a627a; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
     .result-item .result-actions { display: flex; gap: 6px; }
     .result-item .result-actions button { padding: 4px 12px; border-radius: 30px; border: none; font-size: 0.65rem; font-weight: 500; cursor: pointer; transition: 0.2s; }
     .result-item .result-actions .edit-result-btn { background: #fef3c7; color: #92400e; }
@@ -353,9 +353,26 @@
     .result-item .result-actions .delete-result-btn:hover { background: #fecaca; }
     .result-item .result-team { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
     .result-item .result-score { background: #eef3ff; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; color: #1e6fdf; font-weight: 600; }
+    .result-item .result-winner { background: #d1fae5; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; color: #065f46; font-weight: 600; }
 
-    .vs-text { font-weight: 700; color: #1e6fdf; margin: 0 6px; }
+    .vs-text { font-weight: 700; color: #1e6fdf; margin: 0 4px; }
     .player-names { font-size: 0.75rem; color: #4a627a; display: block; margin-top: 2px; }
+    .result-arrow { color: #6c8db0; margin: 0 4px; }
+    .result-item .result-timestamp { font-size: 0.65rem; color: #6c8db0; }
+
+    /* Mr. & Ms. Sportsfest Winners Styles */
+    .winners-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0; }
+    .winners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .winner-card { background: #f8fafc; border-radius: 24px; padding: 1.2rem; border-left: 4px solid #1e6fdf; }
+    .winner-card h4 { font-size: 1rem; color: #0a2540; margin-bottom: 0.8rem; }
+    .winner-card .winner-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
+    .winner-card .winner-item:last-child { border-bottom: none; }
+    .winner-card .winner-title { font-weight: 600; color: #4a627a; }
+    .winner-card .winner-name { font-weight: 700; color: #0a2540; }
+    .winner-card .winner-team { font-size: 0.7rem; padding: 2px 10px; border-radius: 20px; }
+    .winner-card .gold { border-left-color: #fbbf24; }
+    .winner-card .silver { border-left-color: #9ca3af; }
+    .winner-card .bronze { border-left-color: #d97706; }
   </style>
 </head>
 <body>
@@ -429,6 +446,20 @@
       </div>
       <div id="resultsListContainer">
         <div class="empty-state">No results posted yet. Click "Add Result" to create one.</div>
+      </div>
+
+      <!-- Mr. & Ms. Sportsfest Winners Section -->
+      <div class="winners-section">
+        <h3 style="margin-bottom: 0.5rem; color: #0a2540;">👑 Mr. & Ms. Sportsfest 2026 Winners</h3>
+        <p style="color: #4a627a; font-size: 0.85rem; margin-bottom: 1rem;">Manage the winners for Mr. and Ms. Sportsfest pageant.</p>
+        
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
+          <button id="addWinnerBtn" class="action-btn" style="background: #1e6fdf; color: white; padding: 8px 20px;">+ Add Winner</button>
+        </div>
+        
+        <div id="winnersContainer">
+          <div class="empty-state">No winners declared yet. Click "Add Winner" to declare.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -545,6 +576,46 @@
   </div>
 </div>
 
+<!-- Winner Modal -->
+<div id="winnerModal" class="modal-overlay">
+  <div class="modal-container">
+    <h3 id="winnerModalTitle">👑 Add Winner</h3>
+    <form id="winnerForm">
+      <label>Category *</label>
+      <select id="winnerCategory" required>
+        <option value="">Select Category</option>
+        <option value="Mr. Sportsfest">Mr. Sportsfest</option>
+        <option value="Ms. Sportsfest">Ms. Sportsfest</option>
+      </select>
+      
+      <label>Placement *</label>
+      <select id="winnerPlacement" required>
+        <option value="">Select Placement</option>
+        <option value="Winner">Winner</option>
+        <option value="1st Runner-Up">1st Runner-Up</option>
+        <option value="2nd Runner-Up">2nd Runner-Up</option>
+      </select>
+      
+      <label>Candidate Name *</label>
+      <input type="text" id="winnerName" placeholder="Enter candidate's full name" required>
+      
+      <label>Team *</label>
+      <select id="winnerTeam" required>
+        <option value="">Select Team</option>
+        <option value="Water Tribe">💧 Water Tribe</option>
+        <option value="Earth Kingdom">🌍 Earth Kingdom</option>
+        <option value="Fire Nation">🔥 Fire Nation</option>
+        <option value="Air Nomads">🍃 Air Nomads</option>
+      </select>
+      
+      <div class="btn-row">
+        <button type="button" id="cancelWinnerBtn" style="background:#e2e8f0;color:#1f2937;">Cancel</button>
+        <button type="submit" id="saveWinnerBtn" style="background:#1e6fdf;color:white;">Save Winner</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
@@ -566,9 +637,11 @@
 
   let allRegistrations = [];
   let allResults = [];
+  let allWinners = [];
   let charts = { gender: null, sport: null, shirt: null };
   let currentSportFilter = "all";
   let editingResultId = null;
+  let editingWinnerId = null;
   
   const teams = [
     { id: "water", name: "Water Tribe", color: "#2563eb", icon: "💧" },
@@ -582,6 +655,12 @@
     'Earth Kingdom': '🌍',
     'Fire Nation': '🔥',
     'Air Nomads': '🍃'
+  };
+
+  const placementIcons = {
+    'Winner': '🥇',
+    '1st Runner-Up': '🥈',
+    '2nd Runner-Up': '🥉'
   };
 
   const DOM = {
@@ -625,7 +704,19 @@
     clearMedicalFiltersBtn: document.getElementById('clearMedicalFiltersBtn'),
     exportMedicalCsvBtn: document.getElementById('exportMedicalCsvBtn'),
     medicalListContainer: document.getElementById('medicalListContainer'),
-    medicalStats: document.getElementById('medicalStats')
+    medicalStats: document.getElementById('medicalStats'),
+    // Winner related
+    winnerModal: document.getElementById('winnerModal'),
+    winnerForm: document.getElementById('winnerForm'),
+    winnerCategory: document.getElementById('winnerCategory'),
+    winnerPlacement: document.getElementById('winnerPlacement'),
+    winnerName: document.getElementById('winnerName'),
+    winnerTeam: document.getElementById('winnerTeam'),
+    cancelWinnerBtn: document.getElementById('cancelWinnerBtn'),
+    saveWinnerBtn: document.getElementById('saveWinnerBtn'),
+    winnerModalTitle: document.getElementById('winnerModalTitle'),
+    addWinnerBtn: document.getElementById('addWinnerBtn'),
+    winnersContainer: document.getElementById('winnersContainer')
   };
 
   function showToast(message, isError = false) {
@@ -636,6 +727,121 @@
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
   }
+
+  // ============ WINNERS FUNCTIONS ============
+  async function fetchWinners() {
+    try {
+      const q = query(collection(db, "sportsfest_winners"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      allWinners = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderWinnersList();
+      renderWidgets();
+    } catch (err) {
+      console.error("Error fetching winners:", err);
+    }
+  }
+
+  function renderWinnersList() {
+    if (!allWinners.length) {
+      DOM.winnersContainer.innerHTML = '<div class="empty-state">No winners declared yet. Click "Add Winner" to declare.</div>';
+      return;
+    }
+
+    // Group by category
+    const grouped = { 'Mr. Sportsfest': [], 'Ms. Sportsfest': [] };
+    allWinners.forEach(w => {
+      if (grouped[w.category]) grouped[w.category].push(w);
+    });
+
+    let html = '<div class="winners-grid">';
+    Object.keys(grouped).forEach(category => {
+      const winners = grouped[category];
+      const isGold = category === 'Mr. Sportsfest';
+      html += `
+        <div class="winner-card ${isGold ? 'gold' : 'silver'}">
+          <h4>${category === 'Mr. Sportsfest' ? '👔' : '👑'} ${category}</h4>
+      `;
+      winners.forEach(w => {
+        const team = teams.find(t => t.name === w.team);
+        const teamColor = team ? team.color : '#6c8db0';
+        const placementIcon = placementIcons[w.placement] || '🏅';
+        html += `
+          <div class="winner-item">
+            <span>
+              <span style="font-weight: 700;">${placementIcon}</span>
+              <span class="winner-title">${w.placement}:</span>
+              <span class="winner-name">${escapeHtml(w.name)}</span>
+            </span>
+            <span>
+              <span class="winner-team" style="background: ${teamColor}; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.65rem;">${teamIcons[w.team] || ''} ${w.team}</span>
+              <button class="action-btn delete-btn" data-id="${w.id}" style="margin-left: 4px;">✖</button>
+            </span>
+          </div>
+        `;
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+
+    DOM.winnersContainer.innerHTML = html;
+
+    document.querySelectorAll('#winnersContainer .delete-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (confirm('Delete this winner?')) {
+          await deleteDoc(doc(db, "sportsfest_winners", btn.dataset.id));
+          await fetchWinners();
+          showToast('Winner deleted successfully');
+        }
+      });
+    });
+  }
+
+  // ============ WINNER FORM HANDLERS ============
+  DOM.addWinnerBtn?.addEventListener('click', () => {
+    editingWinnerId = null;
+    DOM.winnerModalTitle.innerText = '👑 Add Winner';
+    DOM.winnerForm.reset();
+    DOM.winnerModal.classList.add('active');
+  });
+
+  DOM.cancelWinnerBtn?.addEventListener('click', () => {
+    DOM.winnerModal.classList.remove('active');
+  });
+
+  DOM.winnerForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const category = DOM.winnerCategory.value;
+    const placement = DOM.winnerPlacement.value;
+    const name = DOM.winnerName.value.trim();
+    const team = DOM.winnerTeam.value;
+
+    if (!category || !placement || !name || !team) {
+      showToast('Please fill in all fields.', true);
+      return;
+    }
+
+    const data = { category, placement, name, team, updatedAt: new Date() };
+
+    try {
+      if (editingWinnerId) {
+        await updateDoc(doc(db, "sportsfest_winners", editingWinnerId), data);
+        showToast('Winner updated successfully');
+      } else {
+        await addDoc(collection(db, "sportsfest_winners"), { ...data, createdAt: new Date() });
+        showToast('Winner added successfully');
+      }
+      DOM.winnerModal.classList.remove('active');
+      await fetchWinners();
+    } catch (err) {
+      console.error(err);
+      showToast('Error saving winner', true);
+    }
+  });
+
+  // Close winner modal on outside click
+  DOM.winnerModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.winnerModal) DOM.winnerModal.classList.remove('active');
+  });
 
   // ============ RESULTS FUNCTIONS ============
   async function fetchResults() {
@@ -670,8 +876,8 @@
               <span class="result-team" style="background: ${r.team1 === 'Water Tribe' ? '#2563eb' : r.team1 === 'Earth Kingdom' ? '#16a34a' : r.team1 === 'Fire Nation' ? '#dc2626' : '#eab308'}; color: ${r.team1 === 'Air Nomads' ? '#422006' : 'white'};">${team1Icon} ${r.team1}</span>
               <span class="vs-text">⚔️ VS ⚔️</span>
               <span class="result-team" style="background: ${r.team2 === 'Water Tribe' ? '#2563eb' : r.team2 === 'Earth Kingdom' ? '#16a34a' : r.team2 === 'Fire Nation' ? '#dc2626' : '#eab308'}; color: ${r.team2 === 'Air Nomads' ? '#422006' : 'white'};">${team2Icon} ${r.team2}</span>
-              <span style="margin: 0 6px;">→</span>
-              <span class="result-score" style="background: #d1fae5; color: #065f46;">🏆 ${winnerIcon} ${r.winner}</span>
+              <span class="result-arrow">→</span>
+              <span class="result-winner">🏆 ${winnerIcon} ${r.winner}</span>
               <span class="result-score">${r.score}</span>
             </div>
             ${(r.team1Players || r.team2Players) ? `<div class="player-names">
@@ -679,7 +885,7 @@
               ${r.team1Players && r.team2Players ? ' | ' : ''}
               ${r.team2Players ? `👤 ${r.team2}: ${r.team2Players}` : ''}
             </div>` : ''}
-            <div style="font-size: 0.65rem; color: #6c8db0; margin-top: 2px;">${r.createdAt?.toDate ? r.createdAt.toDate().toLocaleString() : ''}</div>
+            <div class="result-timestamp">${r.createdAt?.toDate ? r.createdAt.toDate().toLocaleString() : ''}</div>
           </div>
           <div class="result-actions">
             <button class="edit-result-btn" data-id="${r.id}">✏️ Edit</button>
@@ -861,6 +1067,7 @@
     const confirmed = allRegistrations.filter(r => r.registrationStatus === 'confirmed').length;
     const pending = allRegistrations.filter(r => r.registrationStatus !== 'confirmed').length;
     const resultsCount = allResults.length;
+    const winnersCount = allWinners.length;
     
     DOM.widgetsContainer.innerHTML = `
       <div class="widget-card"><h4>Total Registrants</h4><div class="widget-number">${total}</div></div>
@@ -1273,7 +1480,7 @@
         if (section === 'statistics') renderCharts();
         if (section === 'teamAssignment') renderTeamCards();
         if (section === 'medicalConditions') renderMedicalConditions();
-        if (section === 'results') fetchResults();
+        if (section === 'results') { fetchResults(); fetchWinners(); }
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         if (window.innerWidth <= 860) {
@@ -1323,7 +1530,7 @@
       return;
     }
     document.getElementById('roleBadge').innerText = "Admin";
-    await Promise.all([fetchRegistrations(), fetchResults()]);
+    await Promise.all([fetchRegistrations(), fetchResults(), fetchWinners()]);
   });
 
   DOM.modalOverlay?.addEventListener('click', (e) => {
