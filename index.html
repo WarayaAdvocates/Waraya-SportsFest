@@ -668,14 +668,16 @@
   const placementIcons = {
     'Winner': '🥇',
     '1st Runner-Up': '🥈',
-    '2nd Runner-Up': '🥉'
+    '2nd Runner-Up': '🥉',
+    '3rd Runner-Up': '⭐'
   };
 
-  const placementBadgeColors = {
-    'Winner': '#fbbf24',
-    '1st Runner-Up': '#9ca3af',
-    '2nd Runner-Up': '#d97706'
-  };
+const placementBadgeColors = {
+  'Winner': '#fbbf24',         // Gold
+  '1st Runner-Up': '#9ca3af',  // Silver
+  '2nd Runner-Up': '#d97706',  // Bronze
+  '3rd Runner-Up': '#3b82f6'   // Blue
+};
 
   function getTeamColor(team) {
     return teamColors[team] || '#6c8db0';
